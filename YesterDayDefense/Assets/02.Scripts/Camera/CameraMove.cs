@@ -9,7 +9,7 @@ public class CameraMove : MonoBehaviour
     private void LateUpdate()
     {
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-            Input.mousePosition.y, 0));
+            Input.mousePosition.y, 5));
 
         Debug.Log(mousePos);
     }
