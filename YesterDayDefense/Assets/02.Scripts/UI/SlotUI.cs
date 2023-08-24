@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,5 +33,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void ShowInfoUI(bool show)
     {
         _slotInfoUI.SetActive(show);
+        _slotInfoUI.transform.DOKill();
+        _slotInfoUI.transform.DOScaleX(show ? 1 : 0, 0.2f);
     }
 }
