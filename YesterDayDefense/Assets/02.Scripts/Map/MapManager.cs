@@ -46,6 +46,7 @@ public class MapManager : MonoBehaviour
             for(int j = 1; j <= _mapWidth; j++)
             {
                 zone[i,j] = Map.Grass;
+                LoadWeight.Instance.weight[i,j] = 1;
             }
         }
 
