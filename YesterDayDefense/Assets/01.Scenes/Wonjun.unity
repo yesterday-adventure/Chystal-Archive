@@ -287,12 +287,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 988213780}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 4
+  m_MaxValue: 60
   m_WholeNumbers: 0
-  m_Value: 3
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1561680831}
+        m_TargetAssemblyTypeName: MonsterSpawner, Assembly-CSharp
+        m_MethodName: setWave
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &919981587
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,10 +991,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cb08f2fc509c744bda554612172389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waveSlider: {fileID: 655366895}
+  _waveTime: 0
+  _changeWaveTime: 20
   _spawnTime: 1
-  _spawnMosterCount: 0
   _monsterSpawnLevel: 0
-  Spawn: 0
   _monster:
   - {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
   - {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
