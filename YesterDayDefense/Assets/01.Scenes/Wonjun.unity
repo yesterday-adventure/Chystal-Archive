@@ -1000,6 +1000,8 @@ MonoBehaviour:
   - {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
   - {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
   - {fileID: 5159127889478539001, guid: bc9a4f86124b46c46a12dd48c12343e0, type: 3}
+  spawnPositionX: 1
+  spawnPositionY: 1
 --- !u!4 &1561680832
 Transform:
   m_ObjectHideFlags: 0
