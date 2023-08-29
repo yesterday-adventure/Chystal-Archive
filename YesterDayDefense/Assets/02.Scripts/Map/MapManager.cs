@@ -23,6 +23,12 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int _tileX;// 타일 크기 X
     [SerializeField] private int _tileY;// 타일 크기 Y
 
+    [Header("코어 위치")]//왠만해선 안건드는게 좋음
+    [SerializeField] private int _coreX = 16;
+    [SerializeField] private int _coreY = 16; 
+    public int CoreX => _coreX;
+    public int CoreY => _coreY;
+
     public Map[,] zone = new Map[_mapHeight + 1,_mapWidth + 1]; // 0번인덱스는 안 쓸 예정
 
     private void Awake()
