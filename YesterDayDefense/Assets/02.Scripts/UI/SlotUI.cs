@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,11 +9,14 @@ using UnityEngine.UI;
 public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("½½·Ô Á¤º¸")]
-    [SerializeField] private int _price;
+    private int _price;
 
     [SerializeField]
     private GameObject _slotInfoUI;
     private Text _priceTextUI;
+
+    [SerializeField]
+    private BuildAbleMono _object;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -26,6 +30,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Awake()
     {
+        _price = _object.DefaultPrice;
+
         _priceTextUI = _slotInfoUI.transform.Find("PriceText").GetComponent<Text>();
         _priceTextUI.text = _price.ToString();
     }
