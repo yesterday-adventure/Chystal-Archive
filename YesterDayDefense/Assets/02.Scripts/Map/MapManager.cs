@@ -23,7 +23,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int _tileX;// 타일 크기 X
     [SerializeField] private int _tileY;// 타일 크기 Y
 
-    [Header("코어 위치")]//왠만해선 안건드는게 좋음
+    [Header("코어")]//왠만해선 안건드는게 좋음
+    [SerializeField] private GameObject _core;
     [SerializeField] private int _coreX = 16;
     [SerializeField] private int _coreY = 16; 
     public int CoreX => _coreX;
@@ -41,9 +42,14 @@ public class MapManager : MonoBehaviour
         if (_x.Length != _y.Length)
             Debug.LogError($"{transform} : Other Length Map");
 
+    }
+
+    private void Start()
+    {
         InitMap();
         SpawnMap();
         LoadWeight.Instance.InitEndVal();
+        SetPostion(_core,_coreX, _coreY);
     }
 
     private void InitMap()
@@ -71,12 +77,22 @@ public class MapManager : MonoBehaviour
             for(int j = 1; j <= _mapWidth; j++)
             {
                 if (zone[i, j] == Map.Grass)
+                {
                     tile = PoolManager.Instance.Pop("Grass");
+                    tile.transform.position = new Vector3((j - 1) * _tileX, 0, (i - 1) * _tileY);
+                }
                 else if (zone[i, j] == Map.Water)
+                {
                     tile = PoolManager.Instance.Pop("Water");
+                    tile.transform.position = new Vector3((j - 1) * _tileX, 2, (i - 1) * _tileY); // 물 plane이라 보정값 필요
+                }
 
-                tile.transform.position = new Vector3((j - 1) * _tileX, 0, (i - 1) * _tileY);
             }
         }
+    }
+
+    public void SetPostion(GameObject obj, int x, int y)
+    {
+        obj.transform.position = new Vector3((x - 1) * _tileX, 2, (y - 1) * _tileY);
     }
 }

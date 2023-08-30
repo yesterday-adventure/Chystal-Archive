@@ -201,8 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUIPanel: {fileID: 0}
   _poolingList:
-  - {fileID: -3591844728012814606, guid: 5a6c4b076812e884cadb0f708ebee99e, type: 3}
-  - {fileID: -5640132678767493721, guid: 297ec926ca68b564a91f7442c374bd1b, type: 3}
+  - {fileID: -8326154764641858618, guid: f7838b6ed0f673d46adf840e36c247da, type: 3}
+  - {fileID: 6152053912031646958, guid: 955eaf712b982d74abc6f6908e7c0484, type: 3}
 --- !u!1 &522076969
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,10 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97c6d1aa2bc0b1448cd5cd18de7bc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _x: 02000000
-  _y: 03000000
-  _grass: {fileID: -3591844728012814606, guid: 5a6c4b076812e884cadb0f708ebee99e, type: 3}
-  _water: {fileID: -5640132678767493721, guid: 297ec926ca68b564a91f7442c374bd1b, type: 3}
+  _x: 0300000003000000030000000300000004000000040000000400000004000000
+  _y: 0300000004000000050000000600000003000000040000000500000006000000
+  _grass: {fileID: -8326154764641858618, guid: f7838b6ed0f673d46adf840e36c247da, type: 3}
+  _water: {fileID: 6152053912031646958, guid: 955eaf712b982d74abc6f6908e7c0484, type: 3}
   _tileX: 2
   _tileY: 2
   _coreX: 16
@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26668f82d38b72042a10e247040596ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
 --- !u!1 &999187875
 GameObject:
   m_ObjectHideFlags: 0
