@@ -19,16 +19,16 @@ public class LoadWeight : MonoBehaviour
 
     public void ChangeWeight(int x, int y, int val)
     {
-        weight[x,y] += val;
+        weight[x, y] += val;
     }
 
     public void InitEndVal()
     {
-        for(int i = 0; i < 33; i++)
+        for (int i = 0; i < 33; i++)
         {
-            for(int j = 0; j < 33; j++)
+            for (int j = 0; j < 33; j++)
             {
-                endVal[i,j] = 1;
+                endVal[i, j] = 1;
             }
         }
 
@@ -38,7 +38,7 @@ public class LoadWeight : MonoBehaviour
 
         int xIdx = 0;
         int yIdx = 0;
-        for(int i = 1; i <= 32; i++)
+        for (int i = 1; i <= 16; i++)
         {
             yIdx = 0;
             xIdx = i; // ¿ÞÂÊ ³¡¿¡¼­
@@ -46,62 +46,61 @@ public class LoadWeight : MonoBehaviour
             {
                 if (yIdx == 0)
                 {
-                    endVal[xIdx,yIdx] = endVal[xIdx + 1,yIdx] + weight[xIdx, yIdx];
-                }
-                else
-                {
-                    endVal[xIdx, yIdx] = 
-                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
-                }
-                yIdx++;
-                xIdx--;
-            }while (xIdx > 0) ;
-            
-            do
-            {
-                if (yIdx == i)
-                {
                     endVal[xIdx, yIdx] = endVal[xIdx + 1, yIdx] + weight[xIdx, yIdx];
                 }
                 else
                 {
                     endVal[xIdx, yIdx] =
-                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
-                }
-                yIdx++;
-                xIdx--;
-            } while (xIdx > 0);
-            
-            do
-            {
-                if (yIdx == 0)
-                {
-                    endVal[xIdx, yIdx] = endVal[xIdx + 1, yIdx] + weight[xIdx, yIdx];
-                }
-                else
-                {
-                    endVal[xIdx, yIdx] =
-                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
-                }
-                yIdx++;
-                xIdx--;
-            } while (xIdx > 0);
-            
-            do
-            {
-                if (yIdx == 0)
-                {
-                    endVal[xIdx, yIdx] = endVal[xIdx + 1, yIdx] + weight[xIdx, yIdx];
-                }
-                else
-                {
-                    endVal[xIdx, yIdx] =
-                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
+                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]) + weight[xIdx, yIdx];
                 }
                 yIdx++;
                 xIdx--;
             } while (xIdx > 0);
 
+            do
+            {
+                if (yIdx == i)
+                {
+                    endVal[xIdx, yIdx] = endVal[xIdx, yIdx - 1] + weight[xIdx, yIdx];
+                }
+                else
+                {
+                    endVal[xIdx, yIdx] =
+                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
+                }
+                yIdx--;
+                xIdx--;
+            } while (yIdx > 0);
+
+            do
+            {
+                if (yIdx == 0)
+                {
+                    endVal[xIdx, yIdx] = endVal[xIdx - 1, yIdx] + weight[xIdx, yIdx];
+                }
+                else
+                {
+                    endVal[xIdx, yIdx] =
+                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
+                }
+                yIdx--;
+                xIdx++;
+            } while (xIdx < 0);
+
+            do
+            {
+                if (yIdx == 0)
+                {
+                    endVal[xIdx, yIdx] = endVal[xIdx, yIdx + 1] + weight[xIdx, yIdx];
+                }
+                else
+                {
+                    endVal[xIdx, yIdx] =
+                        Mathf.Min(endVal[xIdx + 1, yIdx], endVal[xIdx, yIdx - 1]);
+                }
+                yIdx++;
+                xIdx++;
+            } while (yIdx < 0);
         }
     }
 }

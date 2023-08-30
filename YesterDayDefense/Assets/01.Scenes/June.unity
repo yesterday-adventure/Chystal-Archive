@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b681c533d08773744a231f0449ff9dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameUIPanel: {fileID: 0}
   _poolingList:
   - {fileID: -3591844728012814606, guid: 5a6c4b076812e884cadb0f708ebee99e, type: 3}
   - {fileID: -5640132678767493721, guid: 297ec926ca68b564a91f7442c374bd1b, type: 3}
@@ -286,6 +287,8 @@ MonoBehaviour:
   _water: {fileID: -5640132678767493721, guid: 297ec926ca68b564a91f7442c374bd1b, type: 3}
   _tileX: 2
   _tileY: 2
+  _coreX: 16
+  _coreY: 16
 --- !u!114 &579620848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,63 +372,6 @@ Transform:
   m_Father: {fileID: 1325368062}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 33.18, z: 0}
---- !u!1001 &1091086077
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577922927071859781, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4245915190017150719, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-      propertyPath: m_Name
-      value: MushroomAngryPA
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
 --- !u!1 &1116419675
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +402,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1116419677
 MonoBehaviour:
