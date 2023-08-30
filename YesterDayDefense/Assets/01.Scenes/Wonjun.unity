@@ -993,15 +993,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveSlider: {fileID: 655366895}
   _waveTime: 0
-  _changeWaveTime: 20
+  _changeSpawnTime:
+  - changeSpawnTime: 10
+  - changeSpawnTime: 30
   _spawnTime: 1
   _monsterSpawnLevel: 0
-  _monster:
-  - {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
-  - {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
-  - {fileID: 5159127889478539001, guid: bc9a4f86124b46c46a12dd48c12343e0, type: 3}
-  spawnPositionX: 1
-  spawnPositionY: 1
+  _waveData:
+  - SpawnDatas:
+    - MobPrefab: {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
+      SpawnPos: {x: 1, y: 1, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 2
+    - MobPrefab: {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
+      SpawnPos: {x: 0, y: 0, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 3
+    - MobPrefab: {fileID: 5159127889478539001, guid: bc9a4f86124b46c46a12dd48c12343e0, type: 3}
+      SpawnPos: {x: 3, y: 2, z: 0}
+      SpawnCount: 4
+      SpawnDelay: 1
+      SpawnTerm: 4
+  - SpawnDatas:
+    - MobPrefab: {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
+      SpawnPos: {x: 2, y: 3, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 2
+    - MobPrefab: {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
+      SpawnPos: {x: 5, y: 5, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 3
+    - MobPrefab: {fileID: 5159127889478539001, guid: bc9a4f86124b46c46a12dd48c12343e0, type: 3}
+      SpawnPos: {x: 7, y: 1, z: 0}
+      SpawnCount: 4
+      SpawnDelay: 1
+      SpawnTerm: 4
+  - SpawnDatas:
+    - MobPrefab: {fileID: 5426772606687392494, guid: 5e1571b9dc33fd548bf32f6e076e5bcc, type: 3}
+      SpawnPos: {x: 3, y: 1, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 2
+    - MobPrefab: {fileID: 3713558568956242410, guid: 292d16a103f2e6e408d48445531b8ff5, type: 3}
+      SpawnPos: {x: 4, y: 3, z: 0}
+      SpawnCount: 5
+      SpawnDelay: 1
+      SpawnTerm: 3
+    - MobPrefab: {fileID: 5159127889478539001, guid: bc9a4f86124b46c46a12dd48c12343e0, type: 3}
+      SpawnPos: {x: 2, y: 8, z: 0}
+      SpawnCount: 4
+      SpawnDelay: 1
+      SpawnTerm: 4
+  _waveCount: 0
 --- !u!4 &1561680832
 Transform:
   m_ObjectHideFlags: 0
