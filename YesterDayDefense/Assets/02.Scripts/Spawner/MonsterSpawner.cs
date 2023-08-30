@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class SpawnTime
+{
+    public float changeSpawnTime;
+}
+
 public class MonsterSpawner : MonoBehaviour
 {
+    [SerializeField]
+    private Image[] _waveImage; 
     [SerializeField]
     private Slider _waveSlider;
     [SerializeField]
     private float _waveTime = 0f;
     [SerializeField]
-    private float _changeWaveTime = 20f;
+    private List<SpawnTime> _changeSpawnTime;
+
+    [Header("몬스터 소환 웨이브 데이터")]
     [SerializeField]
-    private float _spawnTime = 1f;
-    [SerializeField]
-    private int _monsterSpawnLevel = 1;
+    private List<Wave> _waveData;
 
     [SerializeField]
-    private GameObject[] _monster;
-
-    [SerializeField]
-    private float spawnPositionX; 
-    [SerializeField]
-    private float spawnPositionY; 
+    private int _waveCount = 0;
 
     private bool _spawningFirstWave = true;
     private bool _spawningSecondWave = false;
@@ -31,38 +34,49 @@ public class MonsterSpawner : MonoBehaviour
     private void Awake()
     {
         _waveTime = 0f;
-        StartCoroutine(SpawnWave(_monster[_monsterSpawnLevel]));
+        StartSpawn();
     }
 
     private void Update()
     {
         _waveTime += Time.deltaTime;
 
-        if (_waveTime >= _changeWaveTime && _spawningFirstWave)
+        if (_waveTime >= _changeSpawnTime[0].changeSpawnTime && _spawningFirstWave)
         {
+            _waveCount++;
             _spawningFirstWave = false;
             _spawningSecondWave = true;
-            _monsterSpawnLevel = Random.Range(0, _monster.Length);
-            StartCoroutine(SpawnWave(_monster[_monsterSpawnLevel]));
+            StartSpawn();
         }
-        else if (_waveTime >= (_changeWaveTime * 2) && _spawningSecondWave)
+        else if (_waveTime >= _changeSpawnTime[1].changeSpawnTime && _spawningSecondWave)
         {
+            _waveCount++;
             _spawningSecondWave = false;
             _spawningFinalWave = true;
-            _monsterSpawnLevel = Random.Range(0, _monster.Length);
-            StartCoroutine(SpawnWave(_monster[_monsterSpawnLevel]));
+            StartSpawn();
         }
         _waveSlider.value = _waveTime;
     }
 
-    IEnumerator SpawnWave(GameObject monster)
+    void StartSpawn()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            StartCoroutine(SpawnMonster(_waveData[_waveCount].SpawnDatas[i].MobPrefab, i));
+        }
+    }
+
+    IEnumerator SpawnMonster(GameObject monster, int idx)
+    {
+        yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnDelay);
         while (_spawningFirstWave || _spawningSecondWave || _spawningFinalWave)
         {
             Debug.Log("SpawnWave: " + monster.name);
-            Vector3 spawnPosition = new Vector3(spawnPositionX, spawnPositionY, 0f); 
+            Vector3 spawnPosition = _waveData[_waveCount].SpawnDatas[idx].SpawnPos;
             Instantiate(monster, spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(_spawnTime);
+            yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnTerm);
         }
     }
 }
+
+
