@@ -19,6 +19,7 @@ public class UIManager
     private Button _sellBtn;
 
     private bool _isShowBuildInfoPanel = false;
+    private bool _isShowBuildShopPanel = false;
 
 
     public UIManager(Transform gameUIPanel)
@@ -53,7 +54,7 @@ public class UIManager
     }
     public void ShowOffBuildInfoPanel()
     {
-        if (_isShowBuildInfoPanel == false)
+        if (_isShowBuildInfoPanel == false || _isShowBuildShopPanel == true)
             return;
 
         _isShowBuildInfoPanel = false;
@@ -61,8 +62,22 @@ public class UIManager
         _buildInfoPanel.gameObject.SetActive(false);
         _buildInfoPanel.DOScaleX(0, 0.2f);
     }
-    public void OpenBuildObjShopPanel(Vector3 pos, Action act)
+    public void OpenBuildObjShopPanel(Vector3 pos, Action enhancement, Action repair, Action sell)
     {
+        if(_isShowBuildShopPanel == true)
+        {
+            _enhancementBtn.onClick.RemoveAllListeners();
+            _repairBtn.onClick.RemoveAllListeners();
+            _sellBtn.onClick.RemoveAllListeners();
+        }
 
+        _isShowBuildShopPanel = true;
+        _buildObjShopPanel.gameObject.SetActive(true);
+        _buildObjShopPanel.localScale = Vector3.zero;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        _buildObjShopPanel.position = screenPos;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_buildObjShopPanel.DOMoveY(screenPos.y + 80, 0.3f))
+            .Join(_buildObjShopPanel.DOScale(Vector3.one, 0.3f));
     }
 }

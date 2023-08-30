@@ -79,7 +79,8 @@ public class BuildAbleMono : PoolableMono
     }
     private void OnMouseDown()
     {
-        Enhancement();
+        UIManager.Instance.OpenBuildObjShopPanel(transform.position + _infoUIOffset,
+            null, null, null);
     }
     private void OnMouseEnter()
     {
