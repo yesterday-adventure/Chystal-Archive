@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,13 @@ public class UIManager
     private Text _repairPriceText;
     private Text _sellPriceText;
 
+    private Transform _buildObjShopPanel;
+    private Button _enhancementBtn;
+    private Button _repairBtn;
+    private Button _sellBtn;
+
+    private bool _isShowBuildInfoPanel = false;
+
 
     public UIManager(Transform gameUIPanel)
     {
@@ -19,13 +27,23 @@ public class UIManager
         _enhancementPriceText = _buildInfoPanel.Find("enhancementPriceText").GetComponent<Text>();
         _repairPriceText = _buildInfoPanel.Find("repairPriceText").GetComponent<Text>();
         _sellPriceText = _buildInfoPanel.Find("sellPriceText").GetComponent<Text>();
+
+        _buildObjShopPanel = gameUIPanel.Find("BuildObjShopPanel").transform;
+        _enhancementBtn = _buildObjShopPanel.Find("EnhancementBtn").GetComponent<Button>();
+        _repairBtn = _buildObjShopPanel.Find("RepairBtn").GetComponent<Button>();
+        _sellBtn = _buildObjShopPanel.Find("SellBtn").GetComponent<Button>();
     }
 
-    public void ShowBuildInfoPanel(Vector3 pos, int enhancementPrice, int repairPrice, int sellPrice)
+    public void ShowBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)
     {
-        _enhancementPriceText.text = enhancementPrice.ToString();
-        _repairPriceText.text       = repairPrice.ToString();
-        _sellPriceText.text         = sellPrice.ToString();
+        if (_isShowBuildInfoPanel == true)
+            return;
+
+        _isShowBuildInfoPanel = true;
+
+        _enhancementPriceText.text = enhancementPrice;
+        _repairPriceText.text       = repairPrice;
+        _sellPriceText.text         = sellPrice;
 
         _buildInfoPanel.position = Camera.main.WorldToScreenPoint(pos);
         _buildInfoPanel.gameObject.SetActive(true);
@@ -35,7 +53,16 @@ public class UIManager
     }
     public void ShowOffBuildInfoPanel()
     {
+        if (_isShowBuildInfoPanel == false)
+            return;
+
+        _isShowBuildInfoPanel = false;
+
         _buildInfoPanel.gameObject.SetActive(false);
         _buildInfoPanel.DOScaleX(0, 0.2f);
+    }
+    public void OpenBuildObjShopPanel(Vector3 pos, Action act)
+    {
+
     }
 }
