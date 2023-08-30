@@ -43,6 +43,7 @@ public class MapManager : MonoBehaviour
 
         InitMap();
         SpawnMap();
+        LoadWeight.Instance.InitEndVal();
     }
 
     private void InitMap()
