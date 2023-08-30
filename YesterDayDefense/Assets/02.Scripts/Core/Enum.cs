@@ -8,6 +8,12 @@ public enum Map
     Water = 2,
 }
 
+public struct XY
+{
+    public int x;
+    public int y;
+}
+
 public class Enum : MonoBehaviour
 {
 }

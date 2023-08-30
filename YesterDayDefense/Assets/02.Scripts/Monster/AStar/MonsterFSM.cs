@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class NavAgent : MonoBehaviour
+public class MonsterFSM : MonoBehaviour
 {
-    private void Awake()
+    private void OnEnable()
     {
         FindLoad();
     }

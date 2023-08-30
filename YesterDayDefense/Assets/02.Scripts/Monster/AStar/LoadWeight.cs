@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -155,5 +156,39 @@ public class LoadWeight : MonoBehaviour
         }
 
         Debug.Log(s);
+    }
+
+    public XY FindNextPos(int x, int y)
+    {
+        XY xy;
+
+        xy.x = x; 
+        xy.y = y;
+
+        if (weight[xy.x, xy.y] > weight[x + 1, y])
+        {
+            xy.x = x;
+            xy.y = y;
+        }
+
+        if (weight[xy.x, xy.y] > weight[x - 1, y])
+        {
+            xy.x = x;
+            xy.y = y;
+        }
+
+        if (weight[xy.x, xy.y] > weight[x, y + 1])
+        {
+            xy.x = x;
+            xy.y = y;
+        }
+
+        if (weight[xy.x, xy.y] > weight[x, y - 1])
+        {
+            xy.x = x;
+            xy.y = y;
+        }
+
+        return xy;
     }
 }

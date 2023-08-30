@@ -287,6 +287,7 @@ MonoBehaviour:
   _water: {fileID: 6152053912031646958, guid: 955eaf712b982d74abc6f6908e7c0484, type: 3}
   _tileX: 2
   _tileY: 2
+  _core: {fileID: 0}
   _coreX: 16
   _coreY: 16
 --- !u!114 &579620849
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26668f82d38b72042a10e247040596ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
 --- !u!1 &999187875
 GameObject:
   m_ObjectHideFlags: 0
