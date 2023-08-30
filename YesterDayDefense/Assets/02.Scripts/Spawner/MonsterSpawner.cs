@@ -11,7 +11,8 @@ public class SpawnTime
 
 public class MonsterSpawner : MonoBehaviour
 {
-
+    [SerializeField]
+    private Image[] _waveImage; 
     [SerializeField]
     private Slider _waveSlider;
     [SerializeField]
@@ -33,9 +34,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Awake()
     {
         _waveTime = 0f;
-        StartCoroutine(SpawnMonster1(_waveData[_waveCount].SpawnDatas[0].MobPrefab));
-        StartCoroutine(SpawnMonster2(_waveData[_waveCount].SpawnDatas[1].MobPrefab));
-        StartCoroutine(SpawnMonster3(_waveData[_waveCount].SpawnDatas[2].MobPrefab));
+        StartSpawn();
     }
 
     private void Update()
@@ -47,53 +46,35 @@ public class MonsterSpawner : MonoBehaviour
             _waveCount++;
             _spawningFirstWave = false;
             _spawningSecondWave = true;
-            StartCoroutine(SpawnMonster1(_waveData[_waveCount].SpawnDatas[0].MobPrefab));
-            StartCoroutine(SpawnMonster2(_waveData[_waveCount].SpawnDatas[1].MobPrefab));
-            StartCoroutine(SpawnMonster3(_waveData[_waveCount].SpawnDatas[2].MobPrefab));
+            StartSpawn();
         }
         else if (_waveTime >= _changeSpawnTime[1].changeSpawnTime && _spawningSecondWave)
         {
             _waveCount++;
             _spawningSecondWave = false;
             _spawningFinalWave = true;
-            StartCoroutine(SpawnMonster1(_waveData[_waveCount].SpawnDatas[0].MobPrefab));
-            StartCoroutine(SpawnMonster2(_waveData[_waveCount].SpawnDatas[1].MobPrefab));
-            StartCoroutine(SpawnMonster3(_waveData[_waveCount].SpawnDatas[2].MobPrefab));
+            StartSpawn();
         }
         _waveSlider.value = _waveTime;
     }
 
-    IEnumerator SpawnMonster1(GameObject monster)
+    void StartSpawn()
     {
-        yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[0].SpawnDelay);
-        while (_spawningFirstWave || _spawningSecondWave || _spawningFinalWave)
+        for (int i = 0; i < 3; i++)
         {
-            Debug.Log("SpawnWave: " + monster.name);
-            Vector3 spawnPosition = _waveData[_waveCount].SpawnDatas[0].SpawnPos;
-            Instantiate(monster, spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[0].SpawnTerm);
+            StartCoroutine(SpawnMonster(_waveData[_waveCount].SpawnDatas[i].MobPrefab, i));
         }
     }
-    IEnumerator SpawnMonster2(GameObject monster)
+
+    IEnumerator SpawnMonster(GameObject monster, int idx)
     {
-        yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[1].SpawnDelay);
+        yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnDelay);
         while (_spawningFirstWave || _spawningSecondWave || _spawningFinalWave)
         {
             Debug.Log("SpawnWave: " + monster.name);
-            Vector3 spawnPosition = _waveData[_waveCount].SpawnDatas[1].SpawnPos;
+            Vector3 spawnPosition = _waveData[_waveCount].SpawnDatas[idx].SpawnPos;
             Instantiate(monster, spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[1].SpawnTerm);
-        }
-    }
-    IEnumerator SpawnMonster3(GameObject monster)
-    {
-        yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[2].SpawnDelay);
-        while (_spawningFirstWave || _spawningSecondWave || _spawningFinalWave)
-        {
-            Debug.Log("SpawnWave: " + monster.name);
-            Vector3 spawnPosition = _waveData[_waveCount].SpawnDatas[2].SpawnPos;
-            Instantiate(monster, spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[2].SpawnTerm);
+            yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnTerm);
         }
     }
 }
