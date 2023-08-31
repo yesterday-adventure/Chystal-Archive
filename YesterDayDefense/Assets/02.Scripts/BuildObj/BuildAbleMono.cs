@@ -102,15 +102,29 @@ public class BuildAbleMono : PoolableMono
     }
     private void OnMouseDown()
     {
-        UIManager.Instance.OpenBuildObjShopPanel(transform.position + _activeObject.InfoUIOffset,
-            !FullEnhancement ? Enhancement : null, 
+        if(UIManager.Instance.GetBuildShopPanelShowed == false)
+        {
+            if(UIManager.Instance.GetBuildInfoPanelShowed == false)
+            {
+                UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
+                    !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
+                    RepairPrice.ToString(),
+                    SellPrice.ToString());
+            }
+            UIManager.Instance.OpenBuildObjShopPanel(transform.position + _activeObject.InfoUIOffset,
+            !FullEnhancement ? Enhancement : null,
             Repair, Sell);
+        }
+        else
+        {
+            UIManager.Instance.CloseBuildObjShopPanel();
+        }
     }
     private void OnMouseEnter()
     {
-        UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset, 
-            !FullEnhancement ? _currentEnhancementPrice.ToString() : "X", 
-            RepairPrice.ToString(), 
+        UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
+            !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
+            RepairPrice.ToString(),
             SellPrice.ToString());
     }
     private void OnMouseExit()

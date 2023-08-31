@@ -92,7 +92,7 @@ public class TurretAI : MonoBehaviour {
 
         for (int i = 0; i < colls.Length; i++)
         {
-            if (colls[i].tag == "Player")
+            if (colls[i].tag == "Enemy")
             {
                 float dist = Vector3.Distance(transform.position, colls[i].transform.position);
                 if (dist < distAway)
@@ -210,5 +210,10 @@ public class TurretAI : MonoBehaviour {
             Projectile projectile = missleGo.GetComponent<Projectile>();
             projectile.target = currentTarget.transform;
         }
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        currentTarget = target;
     }
 }
