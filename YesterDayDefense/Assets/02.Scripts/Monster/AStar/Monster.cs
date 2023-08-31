@@ -65,8 +65,8 @@ public class Monster : MonoBehaviour
         nextMapPostion = new Vector3(xy.x, transform.position.y, xy.y);
         dir = nextMapPostion - transform.position;
 
-        while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.01f ||
-            Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.01f)
+        while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
+            Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.1f)
         {
 
             transform.position += dir * _speed * Time.deltaTime;
