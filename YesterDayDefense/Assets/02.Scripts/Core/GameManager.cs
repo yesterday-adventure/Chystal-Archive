@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<PoolableMono> _poolingList = new List<PoolableMono>();
+    [SerializeField]
+    private List<PoolableMono> _monsterpoolingList = new List<PoolableMono>();
 
     [field:SerializeField]
     public int Money { get; private set; } = 0;
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
         PoolManager.Instance = new PoolManager(transform);
         foreach(var pool in _poolingList)
             PoolManager.Instance.CreatePool(pool);
+        foreach (var pool in _monsterpoolingList)
+            PoolManager.Instance.CreatePool(pool,0);
 
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Monster : MonoBehaviour
+public abstract class Monster : MonoBehaviour
 {
     [Header("정보")]
     [SerializeField] private int _hp;
@@ -14,6 +14,8 @@ public class Monster : MonoBehaviour
     [Header("위치")]
     [SerializeField] protected int _xIdx;
     [SerializeField] protected int _yIdx;
+
+    [Header("디버프")]
 
     private XY _nexpos;
     private int _nextPosX;
@@ -47,10 +49,7 @@ public class Monster : MonoBehaviour
         StartCoroutine(IMove());
     }
 
-    protected virtual void Attack()
-    {
-
-    }
+    protected abstract void Attack();
 
     public void SetPosXY(int x, int y)
     {

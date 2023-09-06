@@ -19,6 +19,9 @@ public class MapManager : MonoBehaviour
     [SerializeField] PoolableMono _grass;
     [SerializeField] PoolableMono _water;
 
+    [Header("데코 프리팹")]
+    [SerializeField] PoolableMono[] _deco;
+
     [Header("블록 사이즈")]
     [SerializeField] private int _tileX;// 타일 크기 X
     [SerializeField] private int _tileY;// 타일 크기 Y
@@ -75,6 +78,7 @@ public class MapManager : MonoBehaviour
     private void SpawnMap()
     {
         PoolableMono tile = null;
+        PoolableMono deco = null;
         for(int i = 1; i < _mapHeight; i++)
         {
             for(int j = 1; j < _mapWidth; j++)
@@ -88,6 +92,12 @@ public class MapManager : MonoBehaviour
                 {
                     tile = PoolManager.Instance.Pop("Water");
                     tile.transform.position = new Vector3((j - 1) * _tileX, 2, (i - 1) * _tileY); // 물 plane이라 보정값 필요
+                }
+
+                if(i <= 3 || i >= 29 || j <= 3 || j >= 29)
+                {
+                    deco = PoolManager.Instance.Pop(_deco[Random.Range(0, _deco.Length)].name);
+                    deco.transform.position = new Vector3((j - 1) * _tileX, 2, (i - 1) * _tileY);
                 }
             }
         }
