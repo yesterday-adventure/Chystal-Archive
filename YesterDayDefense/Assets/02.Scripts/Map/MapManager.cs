@@ -30,7 +30,10 @@ public class MapManager : MonoBehaviour
     public int CoreX => _coreX;
     public int CoreY => _coreY;
 
+    [Header("맵 정보")]
     public Map[,] zone = new Map[_mapHeight + 1,_mapWidth + 1]; // 0번인덱스는 안 쓸 예정
+    public int[,] monterCnt = new int[_mapHeight + 1,_mapWidth + 1]; // 몬스터 몇마리 있는지
+    public bool[,] isturret = new bool[_mapHeight + 1, _mapWidth + 1]; // 포탑이 깔려 있는지
 
     private void Awake()
     {
@@ -54,9 +57,9 @@ public class MapManager : MonoBehaviour
 
     private void InitMap()
     {
-        for(int i = 1; i <= _mapHeight; i++)
+        for(int i = 1; i < _mapHeight; i++)
         {
-            for(int j = 1; j <= _mapWidth; j++)
+            for(int j = 1; j < _mapWidth; j++)
             {
                 zone[i,j] = Map.Grass;
                 LoadWeight.Instance.weight[i,j] = 1;
@@ -72,9 +75,9 @@ public class MapManager : MonoBehaviour
     private void SpawnMap()
     {
         PoolableMono tile = null;
-        for(int i = 1; i <= _mapHeight; i++)
+        for(int i = 1; i < _mapHeight; i++)
         {
-            for(int j = 1; j <= _mapWidth; j++)
+            for(int j = 1; j < _mapWidth; j++)
             {
                 if (zone[i, j] == Map.Grass)
                 {
@@ -86,7 +89,6 @@ public class MapManager : MonoBehaviour
                     tile = PoolManager.Instance.Pop("Water");
                     tile.transform.position = new Vector3((j - 1) * _tileX, 2, (i - 1) * _tileY); // 물 plane이라 보정값 필요
                 }
-
             }
         }
     }
@@ -94,5 +96,17 @@ public class MapManager : MonoBehaviour
     public void SetPostion(GameObject obj, int x, int y)
     {
         obj.transform.position = new Vector3((x - 1) * _tileX, 2, (y - 1) * _tileY);
+    }
+
+    public XY GetPostion(int x, int y)
+    {
+        XY xy;
+        x = (x - 1) * _tileX;
+        y = (y - 1) * _tileY;
+
+        xy.x = x; 
+        xy.y = y;
+
+        return xy;
     }
 }

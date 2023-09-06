@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
 public class LoadWeight : MonoBehaviour
 {
     public static LoadWeight Instance;
@@ -11,6 +13,8 @@ public class LoadWeight : MonoBehaviour
     public int[,] endVal = new int[33, 33];
 
     [SerializeField] bool isDebug = false;
+
+    XY xy;
 
     private void Awake()
     {
@@ -48,7 +52,7 @@ public class LoadWeight : MonoBehaviour
             yIdx = 0;
             do
             {
-                if (centerX - xIdx >= 0 && centerX - xIdx <= 32 && centerY - yIdx >= 0 && centerY - yIdx <= 32)
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
                 {
                     if (yIdx == 0)
                     {
@@ -70,7 +74,7 @@ public class LoadWeight : MonoBehaviour
 
             do
             {
-                if (centerX - xIdx >= 0 && centerX - xIdx <= 32 && centerY - yIdx >= 0 && centerY - yIdx <= 32)
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
                 {
                     if (xIdx == 0)
                     {
@@ -92,7 +96,7 @@ public class LoadWeight : MonoBehaviour
 
             do
             {
-                if (centerX - xIdx >= 0 && centerX - xIdx <= 32 && centerY - yIdx >= 0 && centerY - yIdx <= 32)
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
                 {
                     if (yIdx == 0)
                     {
@@ -114,7 +118,7 @@ public class LoadWeight : MonoBehaviour
 
             do
             {
-                if (centerX - xIdx >= 0 && centerX - xIdx <= 32 && centerY - yIdx >= 0 && centerY - yIdx <= 32)
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
                 {
                     if (xIdx == 0)
                     {
@@ -143,9 +147,9 @@ public class LoadWeight : MonoBehaviour
     public void MapDebug()
     {
         string s = "";
-        for (int i = 0; i < 33; i++)
+        for (int i = 1; i < 32; i++)
         {
-            for (int j = 0; j < 33; j++)
+            for (int j = 1; j < 32; j++)
             {
                 if (endVal[i, j] < 10)
                     s += 0;
@@ -160,35 +164,77 @@ public class LoadWeight : MonoBehaviour
 
     public XY FindNextPos(int x, int y)
     {
-        XY xy;
-
         xy.x = x; 
         xy.y = y;
 
-        if (weight[xy.x, xy.y] > weight[x + 1, y])
-        {
-            xy.x = x;
-            xy.y = y;
-        }
+        int randVal = Random.Range(0, 4);
 
-        if (weight[xy.x, xy.y] > weight[x - 1, y])
-        {
-            xy.x = x;
-            xy.y = y;
-        }
-
-        if (weight[xy.x, xy.y] > weight[x, y + 1])
-        {
-            xy.x = x;
-            xy.y = y;
-        }
-
-        if (weight[xy.x, xy.y] > weight[x, y - 1])
-        {
-            xy.x = x;
-            xy.y = y;
-        }
+        if (randVal == 0)
+            CheckLeft(x, y, 0);
+        else if (randVal == 1)
+            CheckRight(x, y, 0);
+        else if (randVal == 2)
+            CheckUp(x, y, 0); 
+        else if (randVal == 3)
+            CheckDown(x, y, 0);
+            
 
         return xy;
+    }
+
+    private void CheckLeft(int x, int y, int idx)
+    {
+        if (idx == 4)
+            return;
+
+        if (endVal[xy.x, xy.y] > endVal[x - 1, y] && x - 1 > 0)
+        {
+            xy.x = x - 1;
+            xy.y = y;
+        }
+
+        CheckRight(x, y, idx + 1);
+    }
+
+    private void CheckRight(int x, int y, int idx)
+    {
+        if (idx == 4)
+            return;
+
+        if (endVal[xy.x, xy.y] > endVal[x + 1, y] && x + 1 < 32)
+        {
+            xy.x = x + 1;
+            xy.y = y;
+        }
+
+        CheckUp(x, y, idx + 1);
+    }
+
+    private void CheckUp(int x, int y, int idx)
+    {
+        if (idx == 4)
+            return;
+
+        if (endVal[xy.x, xy.y] > endVal[x, y + 1] && y + 1 < 32)
+        {
+            xy.x = x;
+            xy.y = y + 1;
+        }
+
+        CheckDown(x, y, idx + 1);
+    }
+
+    private void CheckDown(int x, int y, int idx)
+    {
+        if (idx == 4)
+            return;
+
+        if (endVal[xy.x, xy.y] > endVal[x, y - 1] && y - 1 > 0)
+        {
+            xy.x = x;
+            xy.y = y - 1;
+        }
+
+        CheckLeft(x, y, idx + 1);
     }
 }
