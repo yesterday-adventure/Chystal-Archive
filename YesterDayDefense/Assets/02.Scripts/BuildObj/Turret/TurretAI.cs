@@ -29,15 +29,17 @@ public class TurretAI : MonoBehaviour {
     
     public Transform muzzleMain;
     public Transform muzzleSub;
-    public GameObject muzzleEff;
+    public PoolingParticle muzzleEff;
     public GameObject bullet;
     private bool shootLeft = true;
 
     private Transform lockOnPos;
+    private PoolManager _poolManager;
 
     //public TurretShoot_Base shotScript;
 
     void Start () {
+        _poolManager = PoolManager.Instance;
         InvokeRepeating("ChackForTarget", 0, 0.5f);
         //shotScript = GetComponent<TurretShoot_Base>();
 
@@ -92,7 +94,7 @@ public class TurretAI : MonoBehaviour {
 
         for (int i = 0; i < colls.Length; i++)
         {
-            if (colls[i].tag == "Player")
+            if (colls[i].tag == "Enemy")
             {
                 float dist = Vector3.Distance(transform.position, colls[i].transform.position);
                 if (dist < distAway)
@@ -173,42 +175,55 @@ public class TurretAI : MonoBehaviour {
         }
     }
 
+    private void SummonEffect()
+    {
+        PoolingParticle muzzlePoolEff = _poolManager.Pop(muzzleEff.name) as PoolingParticle;
+        muzzlePoolEff.SetPosition(transform.position);
+        Transform muzzleEffTrm = muzzlePoolEff.transform;
+        muzzleEffTrm.rotation = muzzleMain.rotation;
+    }
+    private void SummonBullet(Vector3 pos, Quaternion rot, Transform target)
+    {
+        Projectile projectile = _poolManager.Pop(bullet.name) as Projectile;
+        projectile.transform.position = pos; // muzzleMain.position;
+        projectile.transform.rotation = rot; // muzzleMain.rotation;
+        projectile.target = target; // lockOnPos;
+    }
+
     public void Shoot(GameObject go)
     {
         if (turretType == TurretType.Catapult)
         {
             lockOnPos = go.transform;
 
-            Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
-            GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-            Projectile projectile = missleGo.GetComponent<Projectile>();
-            projectile.target = lockOnPos;
+            SummonEffect();
+            SummonBullet(muzzleMain.position, muzzleMain.rotation, lockOnPos);
+            
         }
         else if(turretType == TurretType.Dual)
         {
             if (shootLeft)
             {
-                Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
-                GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-                Projectile projectile = missleGo.GetComponent<Projectile>();
-                projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
+                SummonEffect();
+                SummonBullet(muzzleMain.position, muzzleMain.rotation, currentTarget.transform);
             }
             else
             {
-                Instantiate(muzzleEff, muzzleSub.transform.position, muzzleSub.rotation);
-                GameObject missleGo = Instantiate(bullet, muzzleSub.transform.position, muzzleSub.rotation);
-                Projectile projectile = missleGo.GetComponent<Projectile>();
-                projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
+                SummonEffect();
+                SummonBullet(muzzleSub.position, muzzleSub.rotation, currentTarget.transform);
             }
 
             shootLeft = !shootLeft;
         }
         else
         {
-            Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
-            GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-            Projectile projectile = missleGo.GetComponent<Projectile>();
-            projectile.target = currentTarget.transform;
+            SummonEffect();
+            SummonBullet(muzzleMain.position, muzzleMain.rotation, currentTarget.transform);
         }
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        currentTarget = target;
     }
 }

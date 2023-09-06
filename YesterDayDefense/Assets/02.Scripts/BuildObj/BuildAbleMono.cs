@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class BuildObjInfo
 {
     public GameObject Obj;
     public int Health; //체력
+    public Vector3 InfoUIOffset;
     //public 
 }
 
@@ -28,27 +30,48 @@ public class BuildAbleMono : PoolableMono
     // 판매할 때는 여때까지 건물에 쓴 돈의 50%
     public int SellPrice => _spentToBuildPrice / 2;
     public int RepairPrice => (int)(_spentToBuildPrice * (1.0f-(float)_currentHealth / _maxHealth) * 0.5f);
+    public int DefaultPrice => _defaultPrice;
+
+    public bool FullEnhancement => _enhancementValue == _objects.Count - 1;
 
     [Header("건물 강화 오브젝트 정보")]
     [SerializeField]
     protected List<BuildObjInfo> _objects;
-    [SerializeField]
-    private Vector3 _infoUIOffset;
 
-    protected GameObject _activeObject;
+    protected BuildObjInfo _activeObject;
 
     public void Enhancement()
     {
         if (GameManager.Instance.Money < _currentEnhancementPrice)
             return;
 
-        UIManager.Instance.ShowOffBuildInfoPanel();
+        UIManager.Instance.CloseBuildObjShopPanel();
         GameManager.Instance.SpentMoney(_currentEnhancementPrice);
         _spentToBuildPrice += _currentEnhancementPrice;
         _currentEnhancementPrice += (int)(_defaultPrice * 0.5f);
         _enhancementValue++;
         
         ShowObject(_enhancementValue);
+    }
+    public void Repair()
+    {
+        if (GameManager.Instance.Money < RepairPrice)
+            return;
+
+        UIManager.Instance.CloseBuildObjShopPanel();
+        GameManager.Instance.SpentMoney(RepairPrice);
+        _currentHealth = _maxHealth;
+    }
+    public void Sell()
+    {
+        //나중에 가중치 제거 제작
+
+        //임시 디스트로이
+        //나중에 풀매니저 푸쉬로 바꿔야 함
+        Destroy(gameObject);
+
+        GameManager.Instance.PlusMoney(SellPrice);
+        UIManager.Instance.CloseBuildObjShopPanel();
     }
     protected void ShowObject(int i)
     {
@@ -59,10 +82,10 @@ public class BuildAbleMono : PoolableMono
         _maxHealth = _objects[i].Health;
 
         if(_activeObject != null)
-            _activeObject.SetActive(false);
+            _activeObject.Obj.SetActive(false);
 
-        _activeObject = _objects[i].Obj;
-        _activeObject.SetActive(true);
+        _activeObject = _objects[i];
+        _activeObject.Obj.SetActive(true);
     }
 
     private void Awake()
@@ -79,17 +102,33 @@ public class BuildAbleMono : PoolableMono
     }
     private void OnMouseDown()
     {
-        Enhancement();
+        if(UIManager.Instance.GetBuildShopPanelShowed == false)
+        {
+            if(UIManager.Instance.GetBuildInfoPanelShowed == false)
+            {
+                UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
+                    !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
+                    RepairPrice.ToString(),
+                    SellPrice.ToString());
+            }
+            UIManager.Instance.OpenBuildObjShopPanel(transform.position + _activeObject.InfoUIOffset,
+            !FullEnhancement ? Enhancement : null,
+            Repair, Sell);
+        }
+        else
+        {
+            UIManager.Instance.CloseBuildObjShopPanel();
+        }
     }
     private void OnMouseEnter()
     {
-        UIManager.Instance.ShowBuildInfoPanel(transform.position + _infoUIOffset, 
-            _currentEnhancementPrice.ToString(), 
-            RepairPrice.ToString(), 
+        UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
+            !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
+            RepairPrice.ToString(),
             SellPrice.ToString());
     }
     private void OnMouseExit()
     {
-        UIManager.Instance.ShowOffBuildInfoPanel();
+        UIManager.Instance.CloseBuildInfoPanel();
     }
 }

@@ -19,6 +19,9 @@ public class UIManager
     private Button _sellBtn;
 
     private bool _isShowBuildInfoPanel = false;
+    private bool _isShowBuildShopPanel = false;
+    public bool GetBuildInfoPanelShowed => _isShowBuildInfoPanel;
+    public bool GetBuildShopPanelShowed => _isShowBuildShopPanel;
 
 
     public UIManager(Transform gameUIPanel)
@@ -34,7 +37,7 @@ public class UIManager
         _sellBtn = _buildObjShopPanel.Find("SellBtn").GetComponent<Button>();
     }
 
-    public void ShowBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)
+    public void OpenBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)
     {
         if (_isShowBuildInfoPanel == true)
             return;
@@ -51,18 +54,63 @@ public class UIManager
         _buildInfoPanel.localScale = new Vector3(0, 1, 1);
         _buildInfoPanel.DOScaleX(1, 0.2f);
     }
-    public void ShowOffBuildInfoPanel()
+    public void CloseBuildInfoPanel()
     {
-        if (_isShowBuildInfoPanel == false)
+        if (_isShowBuildInfoPanel == false || _isShowBuildShopPanel == true)
             return;
 
         _isShowBuildInfoPanel = false;
 
-        _buildInfoPanel.gameObject.SetActive(false);
-        _buildInfoPanel.DOScaleX(0, 0.2f);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_buildInfoPanel.DOScaleX(0, 0.2f))
+            .OnComplete(() =>
+            {
+                _buildInfoPanel.gameObject.SetActive(false);
+            });
+        
     }
-    public void OpenBuildObjShopPanel(Vector3 pos, Action act)
+    public void OpenBuildObjShopPanel(Vector3 pos, Action enhancement, Action repair, Action sell)
     {
+        if(_isShowBuildShopPanel == true)
+        {
+            _enhancementBtn.onClick.RemoveAllListeners();
+            _repairBtn.onClick.RemoveAllListeners();
+            _sellBtn.onClick.RemoveAllListeners();
+        }
 
+        _enhancementBtn.gameObject.SetActive(enhancement!=null);
+
+        _enhancementBtn.onClick.AddListener(() => { enhancement?.Invoke(); });
+        _repairBtn.onClick.AddListener(() => { repair?.Invoke(); });
+        _sellBtn.onClick.AddListener(() => { sell?.Invoke(); });
+
+        _isShowBuildShopPanel = true;
+        _buildObjShopPanel.gameObject.SetActive(true);
+        _buildObjShopPanel.localScale = Vector3.zero;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        _buildObjShopPanel.position = screenPos;
+        _buildObjShopPanel.DOKill();
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_buildObjShopPanel.DOMoveY(screenPos.y + 80, 0.3f))
+            .Join(_buildObjShopPanel.DOScale(Vector3.one, 0.3f));
+    }
+    public void CloseBuildObjShopPanel()
+    {
+        if (_isShowBuildShopPanel == false)
+            return;
+
+        _enhancementBtn.onClick.RemoveAllListeners();
+        _repairBtn.onClick.RemoveAllListeners();
+        _sellBtn.onClick.RemoveAllListeners();
+
+        _isShowBuildShopPanel = false;
+        _buildObjShopPanel.DOKill();
+        CloseBuildInfoPanel();
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_buildObjShopPanel.DOScale(Vector3.zero, 0.3f))
+            .OnComplete(() =>
+            {
+                _buildObjShopPanel.gameObject.SetActive(false);
+            });
     }
 }

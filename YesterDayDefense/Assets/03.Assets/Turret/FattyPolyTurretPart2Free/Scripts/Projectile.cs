@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
+public class Projectile : PoolableMono
+{
 
     public TurretAI.TurretType type = TurretAI.TurretType.Single;
     public Transform target;
@@ -17,20 +19,12 @@ public class Projectile : MonoBehaviour {
     //public Vector3 _startPosition;
     //public float dist;
 
-    public ParticleSystem explosion;
+    public PoolingParticle explosion;
+    private PoolManager _poolManager;
 
-    private void Start()
+    private void Awake()
     {
-        if (catapult)
-        {
-            lockOn = true;
-        }
-
-        if (type == TurretAI.TurretType.Single)
-        {
-            Vector3 dir = target.position - transform.position;
-            transform.rotation = Quaternion.LookRotation(dir);
-        }
+        _poolManager = PoolManager.Instance;
     }
 
     private void Update()
@@ -102,20 +96,45 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Enemy")
         {
-            Vector3 dir = other.transform.position - transform.position;
-            //Vector3 knockBackPos = other.transform.position * (-dir.normalized * knockBack);
-            Vector3 knockBackPos = other.transform.position + (dir.normalized * knockBack);
-            knockBackPos.y = 1;
-            other.transform.position = knockBackPos;
+            // 명중효과 작성
+            EnemyDamage(other.gameObject);
             Explosion();
         }
     }
 
+    private void EnemyDamage(GameObject gameObject)
+    {
+        //
+        Debug.Log("데미지");
+    }
+
     public void Explosion()
     {
-        Instantiate(explosion, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (explosion != null)
+        {
+            PoolingParticle explosionParticle = 
+                (_poolManager.Pop(explosion.name) as PoolingParticle);
+
+            explosionParticle.Play();
+            explosionParticle.SetPosition(transform.position);
+        }
+            
+        _poolManager.Push(this);
+    }
+
+    public override void Reset()
+    {
+        if (catapult)
+        {
+            lockOn = true;
+        }
+
+        if (type == TurretAI.TurretType.Single)
+        {
+            Vector3 dir = target.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
     }
 }
