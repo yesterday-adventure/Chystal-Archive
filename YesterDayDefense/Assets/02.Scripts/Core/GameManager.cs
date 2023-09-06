@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [field:SerializeField]
     public int Money { get; private set; } = 0;
 
+    //나중에 여기다가 몬스터 몇마리 남았는지 필요함
+
     private void Awake()
     {
         if (Instance == null)
