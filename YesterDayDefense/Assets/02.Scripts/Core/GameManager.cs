@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<PoolableMono> _poolingList = new List<PoolableMono>();
 
+    [field:SerializeField]
     public int Money { get; private set; } = 0;
 
     private void Awake()
