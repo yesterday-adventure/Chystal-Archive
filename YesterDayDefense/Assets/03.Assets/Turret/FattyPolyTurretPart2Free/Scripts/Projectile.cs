@@ -16,6 +16,7 @@ public class Projectile : PoolableMono
 
     public float knockBack = 0.1f;
     public float boomTimer = 1;
+    private readonly float _defaultBoomTimeLimit = 1f;
     //public Vector3 _startPosition;
     //public float dist;
 
@@ -136,5 +137,8 @@ public class Projectile : PoolableMono
             Vector3 dir = target.position - transform.position;
             transform.rotation = Quaternion.LookRotation(dir);
         }
+
+        if (type == TurretAI.TurretType.Catapult)
+            boomTimer = _defaultBoomTimeLimit;
     }
 }

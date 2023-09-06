@@ -179,6 +179,7 @@ public class TurretAI : MonoBehaviour {
     {
         PoolingParticle muzzlePoolEff = _poolManager.Pop(muzzleEff.name) as PoolingParticle;
         muzzlePoolEff.SetPosition(transform.position);
+        muzzleEff.Play();
         Transform muzzleEffTrm = muzzlePoolEff.transform;
         muzzleEffTrm.rotation = muzzleMain.rotation;
     }

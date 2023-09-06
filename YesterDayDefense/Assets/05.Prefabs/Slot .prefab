@@ -393,8 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0510ab6791a3b0e4497e01061ec043c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 100
   _slotInfoUI: {fileID: 5243125664229257573}
+  _object: {fileID: 0}
 --- !u!1 &5243125665475992028
 GameObject:
   m_ObjectHideFlags: 0
