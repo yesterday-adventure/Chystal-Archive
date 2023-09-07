@@ -11,11 +11,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<PoolableMono> _poolingList = new List<PoolableMono>();
+
     [SerializeField]
     private List<PoolableMono> _monsterpoolingList = new List<PoolableMono>();
 
     [field:SerializeField]
     public int Money { get; private set; } = 0;
+
+    public Transform monsterParentTrm;
 
     //나중에 여기다가 몬스터 몇마리 남았는지 필요함
 
@@ -39,4 +42,13 @@ public class GameManager : MonoBehaviour
 
     public void PlusMoney(int plus)     => Money += plus;
     public void SpentMoney(int spent)   => Money -= spent;
+
+    public void GameOver()
+    {
+        Monster[] monsters = monsterParentTrm.GetComponentsInChildren<Monster>();
+        foreach(Monster monster in monsters)
+        {
+            monster.GameOver();
+        }
+    }
 }

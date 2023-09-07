@@ -6,6 +6,6 @@ public class MonsterPlant : Monster
 {
     protected override void Attack()
     {
-
+        throw new System.NotImplementedException();
     }
 }

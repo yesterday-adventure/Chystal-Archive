@@ -650,7 +650,6 @@ GameObject:
   - component: {fileID: 4843028258353612}
   - component: {fileID: 95690966028241422}
   - component: {fileID: -7744650017089084600}
-  - component: {fileID: -5680368158907962777}
   m_Layer: 0
   m_Name: SpiderPBR
   m_TagString: Untagged
@@ -713,18 +712,6 @@ MonoBehaviour:
   _speed: 0
   _xIdx: 0
   _yIdx: 0
---- !u!114 &-5680368158907962777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557585983417840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc9600d46049784e8c51453776cf559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1574160754023944
 GameObject:
   m_ObjectHideFlags: 0
