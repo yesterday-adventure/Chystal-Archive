@@ -281,6 +281,7 @@ MonoBehaviour:
   - {fileID: 114673051568919746, guid: 9e0d59e1858a95d4aafcfc9ef7e94671, type: 3}
   - {fileID: -9142492813441582477, guid: 6d074a749488789479e539251fdf184e, type: 3}
   - {fileID: -7250357666171976228, guid: bd75ef4ae186f454a90b2de71bed2854, type: 3}
+  _monsterpoolingList: []
   <Money>k__BackingField: 1000
 --- !u!4 &284800688
 Transform:
