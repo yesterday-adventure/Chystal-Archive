@@ -589,7 +589,6 @@ GameObject:
   - component: {fileID: 6285209290496798482}
   - component: {fileID: 6285209290506305774}
   - component: {fileID: -1826604213466234163}
-  - component: {fileID: -3193516784428814405}
   m_Layer: 0
   m_Name: SkeletonPBR
   m_TagString: Untagged
@@ -652,18 +651,6 @@ MonoBehaviour:
   _speed: 0
   _xIdx: 0
   _yIdx: 0
---- !u!114 &-3193516784428814405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6285209290496832306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc9600d46049784e8c51453776cf559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6285209290496832308
 GameObject:
   m_ObjectHideFlags: 0
