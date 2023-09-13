@@ -12,6 +12,8 @@ public class LoadWeight : MonoBehaviour
     public int[,] weight = new int[33, 33];
     public int[,] endVal = new int[33, 33];
 
+    public bool[,] isSetup = new bool[33, 33];
+
     [SerializeField] bool isDebug = false;
 
     XY xy;
@@ -22,6 +24,8 @@ public class LoadWeight : MonoBehaviour
             Instance = this;
         else
             Debug.LogError($"{transform} : LoadWeight is multiple running!");
+
+        isSetup[16,16] = true; // 크리스탈 위치
     }
 
     public void ChangeWeight(int x, int y, int val)

@@ -14,6 +14,7 @@ public struct XY
     public int y;
 }
 
+
 public class Enum : MonoBehaviour
 {
 }

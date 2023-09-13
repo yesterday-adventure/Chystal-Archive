@@ -24,6 +24,10 @@ public class CameraMove : MonoBehaviour
             _dir.y = 0;
             transform.position += _dir * _moveSpeed * Time.deltaTime;
             _mousePos = _lastMousePos;
+            transform.localPosition = new Vector3(
+                Mathf.Clamp(transform.localPosition.x, -14, 13),
+                transform.position.y, 
+                Mathf.Clamp(transform.localPosition.z, -17, 21));
         }
     }
 }

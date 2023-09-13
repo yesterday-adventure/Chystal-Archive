@@ -2,15 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_forest_waterB_URP
-  m_Shader: {fileID: -6465566751694194690, guid: 6e4ce81940a75324b8f2427ffca2a98c,
-    type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: -6465566751694194690, guid: 6e4ce81940a75324b8f2427ffca2a98c, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -80,6 +80,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_1: 1
     - Vector1_2: 0.62
@@ -111,13 +112,24 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_4d40b59fb32b4d20b640b35d1e71e1f8: {r: 1, g: 1, b: 1, a: 1}
-    - Color_9c89735cd24f4fdfbbabf0583677361a: {r: 0.30588236, g: 0.6431373, b: 0.4627451,
-        a: 1}
-    - Color_f74ee380c8c643518c30ecf1fd09c81f: {r: 0.23487006, g: 0.5471698, b: 0.4847088,
-        a: 1}
+    - Color_9c89735cd24f4fdfbbabf0583677361a: {r: 0.30588236, g: 0.6431373, b: 0.4627451, a: 1}
+    - Color_f74ee380c8c643518c30ecf1fd09c81f: {r: 0.23487006, g: 0.5471698, b: 0.4847088, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _colEdge1: {r: 1, g: 1, b: 1, a: 1}
     - _colEdge2: {r: 0.30562478, g: 0.6415094, b: 0.4621448, a: 1}
     - _colWater: {r: 0.30562478, g: 0.6415094, b: 0.4621448, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &7998690342821871344
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5

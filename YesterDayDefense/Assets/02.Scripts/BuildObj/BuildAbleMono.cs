@@ -73,6 +73,12 @@ public class BuildAbleMono : PoolableMono
         GameManager.Instance.PlusMoney(SellPrice);
         UIManager.Instance.CloseBuildObjShopPanel();
     }
+
+    public void Damage(int damage)
+    {
+        _currentHealth -= damage;
+    }
+
     protected void ShowObject(int i)
     {
         if (i < 0 || i >= _objects.Count)
