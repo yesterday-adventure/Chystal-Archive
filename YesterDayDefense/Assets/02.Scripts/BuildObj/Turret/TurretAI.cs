@@ -178,10 +178,9 @@ public class TurretAI : MonoBehaviour {
     private void SummonEffect()
     {
         PoolingParticle muzzlePoolEff = _poolManager.Pop(muzzleEff.name) as PoolingParticle;
-        muzzlePoolEff.SetPosition(transform.position);
-        muzzleEff.Play();
-        Transform muzzleEffTrm = muzzlePoolEff.transform;
-        muzzleEffTrm.rotation = muzzleMain.rotation;
+        muzzlePoolEff.SetPosition(muzzleMain.position);
+        muzzlePoolEff.transform.rotation = muzzleMain.rotation;
+        muzzlePoolEff.Play();
     }
     private void SummonBullet(Vector3 pos, Quaternion rot, Transform target)
     {
