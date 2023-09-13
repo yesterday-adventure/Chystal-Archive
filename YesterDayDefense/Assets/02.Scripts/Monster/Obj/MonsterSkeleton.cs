@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class MonsterSkeleton : Monster
 {
-    protected override void Attack()
-    {
-
-    }
 }

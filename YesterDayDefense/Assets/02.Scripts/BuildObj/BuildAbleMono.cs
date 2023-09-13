@@ -74,7 +74,7 @@ public class BuildAbleMono : PoolableMono
         UIManager.Instance.CloseBuildObjShopPanel();
     }
 
-    public void Damage(int damage)
+    public virtual void Damage(int damage)
     {
         _currentHealth -= damage;
     }
@@ -97,6 +97,11 @@ public class BuildAbleMono : PoolableMono
     private void Awake()
     {
         Reset();
+    }
+
+    private void Start()
+    {
+        LoadWeight.Instance.isSetup[16, 16] = this;
     }
 
     public override void Reset()

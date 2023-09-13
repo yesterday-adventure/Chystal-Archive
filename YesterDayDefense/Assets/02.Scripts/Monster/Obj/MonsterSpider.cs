@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class MonsterSpider : Monster
 {
-    protected override void Attack()
-    {
-
-    }
 }

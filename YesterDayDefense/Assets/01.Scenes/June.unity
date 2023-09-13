@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 330838497}
   - component: {fileID: 330838496}
   - component: {fileID: 330838495}
+  - component: {fileID: 330838499}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -220,6 +221,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &330838499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330838494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8c9f37dbf0c174b9d4c0f01b3898bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultPrice: 0
+  _enhancementValue: 0
+  _currentHealth: 100
+  _objects: []
 --- !u!1 &384794570
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,19 +337,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       propertyPath: _xIdx
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       propertyPath: _yIdx
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       propertyPath: _speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
+      propertyPath: _attack
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1557585983417840, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       propertyPath: m_Name
       value: SpiderPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557585983417840, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4843028258353612, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       propertyPath: m_RootOrder
@@ -501,6 +526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantPBR
       objectReference: {fileID: 0}
+    - target: {fileID: 1748489546896114, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4700302584741114, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -556,6 +585,10 @@ PrefabInstance:
     - target: {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
       propertyPath: _speed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
+      propertyPath: _attack
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
@@ -797,7 +830,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
       propertyPath: _xIdx
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
       propertyPath: _yIdx
@@ -806,6 +839,10 @@ PrefabInstance:
     - target: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
       propertyPath: _speed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      propertyPath: _attack
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6285209290496798482, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
       propertyPath: m_RootOrder
@@ -855,6 +892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonPBR
       objectReference: {fileID: 0}
+    - target: {fileID: 6285209290496832306, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
 --- !u!4 &1204689324 stripped
@@ -871,6 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1265351403}
+  - component: {fileID: 1265351404}
   m_Layer: 0
   m_Name: MonsterObj
   m_TagString: Untagged
@@ -893,6 +935,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265351404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265351402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081d5eec088cff04ca58c4f6ebd980ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1325368061
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,9 +1045,17 @@ PrefabInstance:
       propertyPath: _speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      propertyPath: _attack
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8511647367374691266, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
       propertyPath: m_Name
       value: OrcPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511647367374691266, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8511647367374981090, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
       propertyPath: m_RootOrder
@@ -1156,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1881439770
 Transform:
   m_ObjectHideFlags: 0
