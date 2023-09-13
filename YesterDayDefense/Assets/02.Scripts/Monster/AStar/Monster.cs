@@ -12,8 +12,8 @@ public abstract class Monster : PoolableMono
     private int _curhp;
 
     [Header("위치")]
-    [SerializeField] protected int _xIdx;
-    [SerializeField] protected int _yIdx;
+    public int xIdx;
+    public int yIdx;
 
     [Header("디버프")]
     private bool isSlow;
@@ -49,20 +49,15 @@ public abstract class Monster : PoolableMono
 
     public void SetPosXY(int x, int y)
     {
-        _xIdx = x;
-        _yIdx = y;
-    }
-
-    protected virtual void Move()
-    {
-        StartCoroutine(IMove());
+        xIdx = x;
+        yIdx = y;
     }
 
     public override void Reset()
     {
         InitPosition();
-        FindLoad();
         InitVariable();
+        FindLoad();
     }
 
     public void OnDamage(int damage)
@@ -95,16 +90,16 @@ public abstract class Monster : PoolableMono
 
     private void InitPosition()
     {
-        xy = MapManager.Instance.GetPostion(_xIdx, _yIdx);
+        xy = MapManager.Instance.GetPostion(xIdx, yIdx);
         transform.position = new Vector3(xy.x,2,xy.y);
     }
 
     private void FindLoad()
     {
-        _nexpos = LoadWeight.Instance.FindNextPos(_xIdx, _yIdx);
+        _nexpos = LoadWeight.Instance.FindNextPos(xIdx, yIdx);
         _nextPosX = _nexpos.x;
         _nextPosY = _nexpos.y;
-        Move();
+        StartCoroutine(IMove());
     }
     
     private void InitVariable()
@@ -130,23 +125,22 @@ public abstract class Monster : PoolableMono
                 _animator.SetBool(_attackHash,true);
                 break;
             }
-        
             xy = MapManager.Instance.GetPostion(_nextPosX, _nextPosY);
             nextMapPostion = new Vector3(xy.x, transform.position.y, xy.y);
             dir = nextMapPostion - transform.position;
             if(transform.position.x == nextMapPostion.x)
             {
-                if(transform.position.y > nextMapPostion.y)
+                if(transform.position.z > nextMapPostion.z)
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 else
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
             else
             {
-                if (transform.position.y > nextMapPostion.y)
-                    transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
-                else
+                if (transform.position.z > nextMapPostion.z)
                     transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+                else
+                    transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
             }
 
             while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
