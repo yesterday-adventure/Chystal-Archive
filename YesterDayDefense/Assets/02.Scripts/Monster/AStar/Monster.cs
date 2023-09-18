@@ -12,8 +12,8 @@ public abstract class Monster : PoolableMono
     private int _curhp;
 
     [Header("위치")]
-    [SerializeField] protected int _xIdx;
-    [SerializeField] protected int _yIdx;
+    public int xIdx;
+    public int yIdx;
 
     [Header("디버프")]
     private bool isSlow;
@@ -21,9 +21,11 @@ public abstract class Monster : PoolableMono
 
     [Header("애니메이터")]
     private Animator _animator;
+    public Animator Animator => _animator;
     protected readonly int _moveHash = Animator.StringToHash("CanMove");
     protected readonly int _dieHash = Animator.StringToHash("IsDie");
     protected readonly int _overHash = Animator.StringToHash("IsOver");
+    public int OverHash => _overHash;
     protected readonly int _attackHash = Animator.StringToHash("IsAttack");
 
     private XY _nexpos;
@@ -47,20 +49,15 @@ public abstract class Monster : PoolableMono
 
     public void SetPosXY(int x, int y)
     {
-        _xIdx = x;
-        _yIdx = y;
-    }
-
-    protected virtual void Move()
-    {
-        StartCoroutine(IMove());
+        xIdx = x;
+        yIdx = y;
     }
 
     public override void Reset()
     {
         InitPosition();
-        FindLoad();
         InitVariable();
+        FindLoad();
     }
 
     public void OnDamage(int damage)
@@ -78,20 +75,31 @@ public abstract class Monster : PoolableMono
         _animator.SetBool(_overHash, true);
     }
 
-    protected abstract void Attack();
+    protected void Attack()
+    {
+        if (CheckTower(_nextPosX, _nextPosY))
+        {
+            LoadWeight.Instance.isSetup[_nextPosY, _nextPosY].Damage(_attack);
+        }
+        else
+        {
+            _animator.SetBool(_attackHash, false);
+            StartCoroutine(IMove());
+        }
+    }
 
     private void InitPosition()
     {
-        xy = MapManager.Instance.GetPostion(_xIdx, _yIdx);
+        xy = MapManager.Instance.GetPostion(xIdx, yIdx);
         transform.position = new Vector3(xy.x,2,xy.y);
     }
 
     private void FindLoad()
     {
-        _nexpos = LoadWeight.Instance.FindNextPos(_xIdx, _yIdx);
+        _nexpos = LoadWeight.Instance.FindNextPos(xIdx, yIdx);
         _nextPosX = _nexpos.x;
         _nextPosY = _nexpos.y;
-        Move();
+        StartCoroutine(IMove());
     }
     
     private void InitVariable()
@@ -105,28 +113,50 @@ public abstract class Monster : PoolableMono
 
     private bool CheckTower(int x, int y)
     {
-        return LoadWeight.Instance.isSetup[x, y];
+        return LoadWeight.Instance.isSetup[x, y] != null;
     }
 
     IEnumerator IMove()
     {
-        xy = MapManager.Instance.GetPostion(_nextPosX, _nextPosY);
-        nextMapPostion = new Vector3(xy.x, transform.position.y, xy.y);
-        dir = nextMapPostion - transform.position;
-
-        while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
-            Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.1f)
+        for(int i = 0; i < 1; i++)
         {
+            if (CheckTower(_nextPosX, _nextPosY))
+            {
+                _animator.SetBool(_attackHash,true);
+                break;
+            }
+            xy = MapManager.Instance.GetPostion(_nextPosX, _nextPosY);
+            nextMapPostion = new Vector3(xy.x, transform.position.y, xy.y);
+            dir = nextMapPostion - transform.position;
+            if(transform.position.x == nextMapPostion.x)
+            {
+                if(transform.position.z > nextMapPostion.z)
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                else
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            else
+            {
+                if (transform.position.z > nextMapPostion.z)
+                    transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+                else
+                    transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+            }
 
-            transform.position += dir * _speed * Time.deltaTime;
+            while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
+                Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.1f)
+            {
+                transform.position += dir * _speed * Time.deltaTime;
+                yield return null;
+            }
+
             yield return null;
+            transform.position = nextMapPostion;
+
+            SetPosXY(_nextPosX, _nextPosY);
+            FindLoad();
         }
-
         yield return null;
-        transform.position = nextMapPostion;
-
-        SetPosXY(_nextPosX, _nextPosY);
-        FindLoad();
     }
 
     IEnumerator IDie()
