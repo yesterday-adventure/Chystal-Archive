@@ -20,9 +20,7 @@ public class PoolingParticle : PoolableMono
 
     IEnumerator PlayCoroutine(){
         _particle.Play();
-        Debug.Log("1");
         yield return new WaitUntil(() => !_particle.isPlaying);
-        Debug.Log("2");
 
         Reset();
         PoolManager.Instance.Push(this);
