@@ -99,11 +99,6 @@ public class BuildAbleMono : PoolableMono
         Reset();
     }
 
-    private void Start()
-    {
-        LoadWeight.Instance.isSetup[16, 16] = this;
-    }
-
     public override void Reset()
     {
         _spentToBuildPrice = _defaultPrice;

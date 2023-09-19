@@ -119,4 +119,12 @@ public class MapManager : MonoBehaviour
 
         return xy;
     }
+
+    public XY GetMapPos(int x, int y)
+    {
+        XY xy;
+        xy.x = x / 2;
+        xy.y = y / 2;
+        return xy;
+    }
 }

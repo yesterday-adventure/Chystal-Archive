@@ -63,7 +63,7 @@ public abstract class Monster : PoolableMono
     public void OnDamage(int damage)
     {
         _curhp -= damage;
-        if(_curhp <= 0 )
+        if (_curhp <= 0)
         {
             _animator.SetBool(_dieHash, true);
             StartCoroutine(IDie());
@@ -91,7 +91,7 @@ public abstract class Monster : PoolableMono
     private void InitPosition()
     {
         xy = MapManager.Instance.GetPostion(xIdx, yIdx);
-        transform.position = new Vector3(xy.x,2,xy.y);
+        transform.position = new Vector3(xy.x, 2, xy.y);
     }
 
     private void FindLoad()
@@ -101,7 +101,7 @@ public abstract class Monster : PoolableMono
         _nextPosY = _nexpos.y;
         StartCoroutine(IMove());
     }
-    
+
     private void InitVariable()
     {
         _curhp = _hp;
@@ -118,19 +118,14 @@ public abstract class Monster : PoolableMono
 
     IEnumerator IMove()
     {
-        for(int i = 0; i < 1; i++)
+        for (int i = 0; i < 1; i++)
         {
-            if (CheckTower(_nextPosX, _nextPosY))
-            {
-                _animator.SetBool(_attackHash,true);
-                break;
-            }
             xy = MapManager.Instance.GetPostion(_nextPosX, _nextPosY);
             nextMapPostion = new Vector3(xy.x, transform.position.y, xy.y);
             dir = nextMapPostion - transform.position;
-            if(transform.position.x == nextMapPostion.x)
+            if (transform.position.x == nextMapPostion.x)
             {
-                if(transform.position.z > nextMapPostion.z)
+                if (transform.position.z > nextMapPostion.z)
                     transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 else
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -138,11 +133,15 @@ public abstract class Monster : PoolableMono
             else
             {
                 if (transform.position.z > nextMapPostion.z)
-                    transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
                 else
-                    transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
             }
-
+            if (CheckTower(_nextPosX, _nextPosY))
+            {
+                _animator.SetBool(_attackHash, true);
+                break;
+            }
             while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
                 Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.1f)
             {

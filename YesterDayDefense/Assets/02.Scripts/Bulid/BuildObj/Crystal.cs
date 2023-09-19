@@ -9,6 +9,11 @@ public class Crystal : BuildAbleMono
         base.Damage(damage);
         if (_currentHealth <= 0)
             MonsterManager.Instance.GameOver();
-
     }
+
+    private void Start()
+    {
+        LoadWeight.Instance.isSetup[16, 16] = this;
+    }
+
 }
