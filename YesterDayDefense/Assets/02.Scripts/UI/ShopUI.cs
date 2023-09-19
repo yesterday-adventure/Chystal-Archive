@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ShopUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,16 +13,26 @@ public class ShopUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private readonly int _onPanelY = 0, _offPanelY = -140;
     private bool _isShowed = false;
 
+    [SerializeField]
+    private Transform _content;
+    private List<SlotUI> _slotUIList = new List<SlotUI>();
+
+
     private void Awake()
     {
+        _slotUIList = _content.GetComponentsInChildren<SlotUI>().ToList<SlotUI>();
+
         _rectTransform = GetComponent<RectTransform>();
         _scrollbar = _rectTransform.Find("Scrollbar").GetComponent<Scrollbar>();
         ShowPanel(false);
+
+        foreach (var slot in _slotUIList)
+            slot.DropEvent += (pos) => ShowPanel(false);
     }
 
     private void ShowPanel(bool value)
     {
-        if(_isShowed == value)
+        if(_isShowed == value || SlotUI.IsDrag == true)
             return;
         _isShowed = value;
         _scrollbar.enabled = value;
