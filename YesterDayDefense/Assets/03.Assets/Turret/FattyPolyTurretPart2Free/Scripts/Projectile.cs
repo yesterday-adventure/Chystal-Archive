@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Projectile : PoolableMono
 {
+    private int _attackDamage;
 
+    private float _exploveRadius;
+    private bool _isIceBullet;
+
+    [Header("기본 속성값")]
     public TurretAI.TurretType type = TurretAI.TurretType.Single;
     public Transform target;
     public bool lockOn;
@@ -97,20 +102,42 @@ public class Projectile : PoolableMono
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemy")
+        if (other.transform.tag != "Enemy")
+            return;
+
+        // 명중효과 작성
+        if (type == TurretAI.TurretType.Catapult)
         {
-            // 명중효과 작성
-            EnemyDamage(other.gameObject);
-            Explosion();
+            Collider[] cols =
+            Physics.OverlapSphere(transform.position,
+                _exploveRadius, LayerMask.NameToLayer("Enemy"));
+
+            for(int i = 0; i < cols.Length; ++i)
+                if (cols[i].TryGetComponent<Monster>(out Monster mob))
+                    EnemyDamage(mob);
         }
+        else
+        {
+            if (other.TryGetComponent<Monster>(out Monster mob))
+            {
+                EnemyDamage(mob);
+            }
+        }
+
+        Explosion();
     }
 
-    private void EnemyDamage(GameObject gameObject)
+    private void EnemyDamage(Monster mob)
     {
-        //
-        Debug.Log("데미지");
+        mob.OnDamage(_attackDamage, _isIceBullet);
     }
 
+    public void SettingProjectileProperty(int damage, float exploveRadius = 0, bool isIceBullet = false)
+    {
+        _attackDamage = damage;
+        _exploveRadius = exploveRadius;
+        _isIceBullet = isIceBullet;
+    }
     public void Explosion()
     {
         if (explosion != null)

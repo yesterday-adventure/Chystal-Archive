@@ -21,7 +21,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     private BuildAbleMono _object;
 
     public static bool IsDrag = false;
-    private RectTransform _itemImage;
+    private RectTransform _itemImageRectTrm;
+    private Image _itemImage;
     public Action<Vector2> DropEvent; // 드래그 앤 드롭 했을 때 이벤트
     private Transform _canvasTrm;
 
@@ -33,7 +34,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         _priceTextUI = _slotInfoUI.transform.Find("PriceText").GetComponent<Text>();
         _priceTextUI.text = _price.ToString();
 
-        _itemImage = transform.Find("ItemImage").GetComponent<RectTransform>();
+        _itemImageRectTrm = transform.Find("ItemImage").GetComponent<RectTransform>();
+        _itemImage = _itemImageRectTrm.GetComponent<Image>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -50,26 +52,27 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     {
         ShowInfoUI(false);
         IsDrag = true;
-        _itemImage.SetParent(_canvasTrm);
-        _itemImage.SetAsLastSibling();
+        _itemImageRectTrm.SetParent(_canvasTrm);
+        _itemImageRectTrm.SetAsLastSibling();
 
-        
+        _itemImage.color = Color.clear;
     }
     //드래그
     public void OnDrag(PointerEventData eventData)
     {
-        _itemImage.position = eventData.position;
+        _itemImageRectTrm.position = eventData.position;
     }
 
     //드랍
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_itemImage.parent == _canvasTrm)
+        if (_itemImageRectTrm.parent == _canvasTrm)
         {
-            _itemImage.SetParent(transform);
-            _itemImage.localPosition = Vector3.zero;
+            _itemImageRectTrm.SetParent(transform);
+            _itemImageRectTrm.localPosition = Vector3.zero;
         }
         IsDrag = false;
+        _itemImage.color = Color.white;
 
         if (GameManager.Instance.Money < _price)
             return;
