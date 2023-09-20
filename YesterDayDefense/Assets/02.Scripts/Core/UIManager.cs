@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ public class UIManager
     private Button _enhancementBtn;
     private Button _repairBtn;
     private Button _sellBtn;
+
+    private TextMeshProUGUI _moneyText;
 
     private bool _isShowBuildInfoPanel = false;
     private bool _isShowBuildShopPanel = false;
@@ -35,6 +38,8 @@ public class UIManager
         _enhancementBtn = _buildObjShopPanel.Find("EnhancementBtn").GetComponent<Button>();
         _repairBtn = _buildObjShopPanel.Find("RepairBtn").GetComponent<Button>();
         _sellBtn = _buildObjShopPanel.Find("SellBtn").GetComponent<Button>();
+
+        _moneyText = gameUIPanel.Find("IngamePanel/MoneyPos/Money").GetComponent<TextMeshProUGUI>();
     }
 
     public void OpenBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)
@@ -112,5 +117,16 @@ public class UIManager
             {
                 _buildObjShopPanel.gameObject.SetActive(false);
             });
+    }
+    public void SetMoneyText(int money, bool shake = false)
+    {
+        _moneyText.text = money.ToString();
+        if(shake == true)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(_moneyText.rectTransform
+                .DOShakeAnchorPos(1, 20, 100, 90));
+        }
+        
     }
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int Money { get; private set; } = 0;
 
     public Transform monsterParentTrm;
+    private UIManager _uiManager;
 
     //나중에 여기다가 몬스터 몇마리 남았는지 필요함
 
@@ -30,7 +31,10 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"{transform} : GameManager is Multiple running!");
 
         if(_gameUIPanel != null)
-            UIManager.Instance = new UIManager(_gameUIPanel);
+            _uiManager = UIManager.Instance = new UIManager(_gameUIPanel);
+        if (_uiManager == null)
+            Debug.LogError("NoUIManager");
+        _uiManager.SetMoneyText(Money);
 
         PoolManager.Instance = new PoolManager(transform);
         foreach(var pool in _poolingList)
@@ -38,10 +42,20 @@ public class GameManager : MonoBehaviour
         foreach (var pool in _monsterpoolingList)
             PoolManager.Instance.CreatePool(pool,0);
 
+
+
     }
 
-    public void PlusMoney(int plus)     => Money += plus;
-    public void SpentMoney(int spent)   => Money -= spent;
+    public void PlusMoney(int plus)
+    {
+        Money += plus;
+        _uiManager.SetMoneyText(Money);
+    }
+    public void SpentMoney(int spent)
+    {
+        Money -= spent;
+        _uiManager.SetMoneyText(Money, true);
+    }
 
     public void GameOver()
     {

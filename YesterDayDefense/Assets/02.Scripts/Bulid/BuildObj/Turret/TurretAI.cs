@@ -14,15 +14,23 @@ public class TurretAI : MonoBehaviour {
     public GameObject currentTarget;
     public Transform turreyHead;
 
-    public float attackDist = 10.0f;
-    public float attackDamage;
-    public float shootCoolDown;
-    private float timer;
-    public float loockSpeed;
-
     //public Quaternion randomRot;
     public Vector3 randomRot;
     public Animator animator;
+
+    private float timer;
+
+    [Header("폭발 범위")]
+    [SerializeField] private float _exploveRadius;
+
+    [Header("공격 속성값")]
+    [SerializeField] private int _attackDamage;
+    [SerializeField] private float shootCoolDown;
+
+    [Header("공격 속성값")]
+    [SerializeField] private float lockSpeed = 100.0f;
+    [SerializeField] private float attackDist = 10.0f;
+    [SerializeField] private bool _isIceBullet = false;
 
     [Header("[Turret Type]")]
     public TurretType turretType = TurretType.Single;
@@ -117,7 +125,7 @@ public class TurretAI : MonoBehaviour {
         }
         else
         {
-            turreyHead.transform.rotation = Quaternion.RotateTowards(turreyHead.rotation, Quaternion.LookRotation(targetDir), loockSpeed * Time.deltaTime);
+            turreyHead.transform.rotation = Quaternion.RotateTowards(turreyHead.rotation, Quaternion.LookRotation(targetDir), lockSpeed * Time.deltaTime);
         }
     }
 
@@ -159,7 +167,7 @@ public class TurretAI : MonoBehaviour {
         
         if (turreyHead.rotation != Quaternion.Euler(randomRot))
         {
-            turreyHead.rotation = Quaternion.RotateTowards(turreyHead.transform.rotation, Quaternion.Euler(randomRot), loockSpeed * Time.deltaTime * 0.2f);
+            turreyHead.rotation = Quaternion.RotateTowards(turreyHead.transform.rotation, Quaternion.Euler(randomRot), lockSpeed * Time.deltaTime * 0.2f);
         }
         else
         {

@@ -60,7 +60,7 @@ public abstract class Monster : PoolableMono
         FindLoad();
     }
 
-    public void OnDamage(int damage)
+    public void OnDamage(int damage, bool ice)
     {
         _curhp -= damage;
         if (_curhp <= 0)
@@ -68,6 +68,9 @@ public abstract class Monster : PoolableMono
             _animator.SetBool(_dieHash, true);
             StartCoroutine(IDie());
         }
+
+        if (ice == true)
+            isSlow = true;
     }
 
     public void GameOver()
