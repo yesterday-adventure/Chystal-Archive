@@ -6,8 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class MonsterSpawnData
 {
-    public GameObject MobPrefab;
-    public Vector3 SpawnPos;
+    public Monster MobPrefab;
+    public int x;
+    public int y;
     public int SpawnCount;
     public float SpawnDelay;
     public float SpawnTerm;

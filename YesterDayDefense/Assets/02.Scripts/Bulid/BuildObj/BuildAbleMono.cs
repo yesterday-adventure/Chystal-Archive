@@ -74,7 +74,7 @@ public class BuildAbleMono : PoolableMono
         UIManager.Instance.CloseBuildObjShopPanel();
     }
 
-    public void Damage(int damage)
+    public virtual void Damage(int damage)
     {
         _currentHealth -= damage;
     }

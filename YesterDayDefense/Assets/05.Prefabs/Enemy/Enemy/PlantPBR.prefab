@@ -1423,11 +1423,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a85a0add053594fab0d475310997fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 0
-  _attack: 0
-  _speed: 0
-  _xIdx: 0
-  _yIdx: 0
+  _hp: 10
+  _attack: 10
+  _speed: 1
+  xIdx: 20
+  yIdx: 20
 --- !u!1 &1781689967026810
 GameObject:
   m_ObjectHideFlags: 0
