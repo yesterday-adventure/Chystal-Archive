@@ -332,7 +332,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1591262119}
   m_HandleRect: {fileID: 1305116366}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -40
   m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 20
@@ -6446,7 +6446,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6501535762757171008, guid: b4c45635e3e4b7a4696c93e18a538032, type: 2}
   m_audioClip: {fileID: 8300000, guid: f7b3057cd86da774fa4c0c88f625fcfc, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
