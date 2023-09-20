@@ -64,8 +64,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         _itemImageRectTrm.SetAsLastSibling();
 
         _temp = PoolManager.Instance.Pop(_object.name);
-        _itemImage.color = Color.clear;
-
+        _itemImage.raycastTarget = false;
+        _lastShopUIPointEnter = true;
     }
     //µå·¡±×
     public void OnDrag(PointerEventData eventData)
@@ -98,6 +98,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
             _itemImageRectTrm.SetParent(transform);
             _itemImageRectTrm.localPosition = Vector3.zero;
             _itemImage.color = Color.white;
+            _itemImage.raycastTarget = true;
         }
         IsDrag = false;
 

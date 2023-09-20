@@ -45,10 +45,12 @@ public class ShopUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("a");
         ShowPanel(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("b");
         ShowPanel(false);
         
     }
