@@ -23,9 +23,12 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     private PoolableMono _temp;
 
     public static bool IsDrag = false;
-    private RectTransform _itemImage;
+    private RectTransform _itemImageRectTrm;
+    private Image _itemImage;
     public Action<Vector2> DropEvent; // 드래그 앤 드롭 했을 때 이벤트
     private Transform _canvasTrm;
+
+    private bool _lastShopUIPointEnter = false;
 
     //월드포지션 받아와서 설치하는 것
     private Vector3 _tempWorldPos;
@@ -39,7 +42,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         _priceTextUI = _slotInfoUI.transform.Find("PriceText").GetComponent<Text>();
         _priceTextUI.text = _price.ToString();
 
-        _itemImage = transform.Find("ItemImage").GetComponent<RectTransform>();
+        _itemImageRectTrm = transform.Find("ItemImage").GetComponent<RectTransform>();
+        _itemImage = _itemImageRectTrm.GetComponent<Image>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -56,18 +60,30 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     {
         ShowInfoUI(false);
         IsDrag = true;
-        _itemImage.SetParent(_canvasTrm);
-        _itemImage.SetAsLastSibling();
+        _itemImageRectTrm.SetParent(_canvasTrm);
+        _itemImageRectTrm.SetAsLastSibling();
 
         _temp = PoolManager.Instance.Pop(_object.name);
+        _itemImage.color = Color.clear;
+
     }
     //드래그
     public void OnDrag(PointerEventData eventData)
     {
-        _itemImage.position = eventData.position;
+        _itemImageRectTrm.position = eventData.position;
         ScreenToWorld();
         _tempWorldPos.x = (int)(Mathf.Round(_tempWorldPos.x / 2)) * 2;
         _tempWorldPos.z = (int)(Mathf.Round(_tempWorldPos.z / 2)) * 2;
+
+        if (ShopUI.IsPointEnter != _lastShopUIPointEnter)
+        {
+            if (ShopUI.IsPointEnter == true)
+                _itemImage.color = Color.white;
+            else
+                _itemImage.color = Color.clear;
+            _lastShopUIPointEnter = ShopUI.IsPointEnter;
+        }
+            
 
         if (LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] == null)
             _temp.transform.position = new Vector3(_tempWorldPos.x, 2, _tempWorldPos.z);
@@ -77,16 +93,19 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     //드랍
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_itemImage.parent == _canvasTrm)
+        if (_itemImageRectTrm.parent == _canvasTrm)
         {
-            _itemImage.SetParent(transform);
-            _itemImage.localPosition = Vector3.zero;
+            _itemImageRectTrm.SetParent(transform);
+            _itemImageRectTrm.localPosition = Vector3.zero;
+            _itemImage.color = Color.white;
         }
         IsDrag = false;
 
-        if (GameManager.Instance.Money < _price)
+        if (GameManager.Instance.Money < _price
+            || ShopUI.IsPointEnter == true)
         {
             PoolManager.Instance.Push(_temp);
+            DropEvent?.Invoke(eventData.position);
             return;
         }
         else

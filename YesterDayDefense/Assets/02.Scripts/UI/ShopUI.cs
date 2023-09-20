@@ -12,6 +12,7 @@ public class ShopUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Scrollbar _scrollbar;
     private readonly int _onPanelY = 0, _offPanelY = -140;
     private bool _isShowed = false;
+    public static bool IsPointEnter = false;
 
     [SerializeField]
     private Transform _content;
@@ -32,6 +33,7 @@ public class ShopUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void ShowPanel(bool value)
     {
+        IsPointEnter = value;
         if(_isShowed == value || SlotUI.IsDrag == true)
             return;
         _isShowed = value;
