@@ -50,14 +50,10 @@ public abstract class Monster : PoolableMono
 
     public override void Reset()
     {
+        StopAllCoroutines();
         InitPosition();
         InitVariable();
         FindLoad();
-    }
-
-    private void OnDisable()
-    {
-        StopAllCoroutines();
     }
 
     public void OnDamage(int damage, bool ice)

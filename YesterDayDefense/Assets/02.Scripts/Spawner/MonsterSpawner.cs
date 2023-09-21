@@ -74,6 +74,7 @@ public class MonsterSpawner : MonoBehaviour
             Monster mob = PoolManager.Instance.Pop(monster.name) as Monster;
             mob.xIdx = _waveData[_waveCount].SpawnDatas[idx].x;
             mob.yIdx = _waveData[_waveCount].SpawnDatas[idx].y;
+            mob.Reset();
             
             yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnTerm);
         }
