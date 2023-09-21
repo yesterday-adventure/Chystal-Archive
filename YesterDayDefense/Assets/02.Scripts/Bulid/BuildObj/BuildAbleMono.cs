@@ -40,6 +40,8 @@ public class BuildAbleMono : PoolableMono
 
     protected BuildObjInfo _activeObject;
 
+    private int x;
+    private int y;
     public void Enhancement()
     {
         if (GameManager.Instance.Money < _currentEnhancementPrice)
@@ -78,7 +80,10 @@ public class BuildAbleMono : PoolableMono
     {
         _currentHealth -= damage;
         if (_currentHealth <= 0)
+        {
             PoolManager.Instance.Push(this);
+            LoadWeight.Instance.isSetup[x, y] = null;
+        }
     }
 
     protected void ShowObject(int i)
@@ -138,5 +143,10 @@ public class BuildAbleMono : PoolableMono
     protected virtual void OnMouseExit()
     {
         UIManager.Instance.CloseBuildInfoPanel();
+    }
+    public void SetXY(int _x, int _y)
+    {
+        x = _x;
+        y = _y;
     }
 }

@@ -62,6 +62,7 @@ public abstract class Monster : PoolableMono
         if (_curhp <= 0)
         {
             _animator.SetBool(_dieHash, true);
+            StopAllCoroutines() ;
             StartCoroutine(IDie());
         }
 
@@ -131,10 +132,10 @@ public abstract class Monster : PoolableMono
             }
             else
             {
-                if (transform.position.z > nextMapPostion.z)
-                    transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-                else
+                if(transform.position.x > nextMapPostion.x)
                     transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+                else
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             if (CheckTower(_nextPosX, _nextPosY))
             {

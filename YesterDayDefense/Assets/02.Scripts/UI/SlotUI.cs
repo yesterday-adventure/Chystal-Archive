@@ -87,6 +87,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
         if (LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] == null)
             _temp.transform.position = new Vector3(_tempWorldPos.x, 2, _tempWorldPos.z);
+
+        _temp.SetXY((int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1);
     }
 
 
