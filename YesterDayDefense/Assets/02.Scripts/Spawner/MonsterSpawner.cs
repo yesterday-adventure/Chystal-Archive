@@ -71,9 +71,10 @@ public class MonsterSpawner : MonoBehaviour
         yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnDelay);
         while (_spawningFirstWave || _spawningSecondWave || _spawningFinalWave)
         {
-            monster.xIdx = _waveData[_waveCount].SpawnDatas[idx].x;
-            monster.yIdx = _waveData[_waveCount].SpawnDatas[idx].y;
-            Instantiate(monster);
+            Monster mob = PoolManager.Instance.Pop(monster.name) as Monster;
+            mob.xIdx = _waveData[_waveCount].SpawnDatas[idx].x;
+            mob.yIdx = _waveData[_waveCount].SpawnDatas[idx].y;
+            
             yield return new WaitForSeconds(_waveData[_waveCount].SpawnDatas[idx].SpawnTerm);
         }
     }

@@ -6,7 +6,7 @@ public class Crystal : BuildAbleMono
 {
     public override void Damage(int damage)
     {
-        base.Damage(damage);
+        _currentHealth -= damage;
         if (_currentHealth <= 0)
             MonsterManager.Instance.GameOver();
     }
@@ -16,4 +16,7 @@ public class Crystal : BuildAbleMono
         LoadWeight.Instance.isSetup[16, 16] = this;
     }
 
+    protected override void OnMouseDown() { }
+    protected override void OnMouseEnter() { }
+    protected override void OnMouseExit() { }
 }

@@ -77,6 +77,8 @@ public class BuildAbleMono : PoolableMono
     public virtual void Damage(int damage)
     {
         _currentHealth -= damage;
+        if (_currentHealth <= 0)
+            PoolManager.Instance.Push(this);
     }
 
     protected void ShowObject(int i)
@@ -106,7 +108,7 @@ public class BuildAbleMono : PoolableMono
         _enhancementValue = 0;
         ShowObject(0);
     }
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         if(UIManager.Instance.GetBuildShopPanelShowed == false)
         {
@@ -126,14 +128,14 @@ public class BuildAbleMono : PoolableMono
             UIManager.Instance.CloseBuildObjShopPanel();
         }
     }
-    private void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
             !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
             RepairPrice.ToString(),
             SellPrice.ToString());
     }
-    private void OnMouseExit()
+    protected virtual void OnMouseExit()
     {
         UIManager.Instance.CloseBuildInfoPanel();
     }

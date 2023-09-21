@@ -196,6 +196,8 @@ public class TurretAI : MonoBehaviour {
         projectile.transform.position = pos; // muzzleMain.position;
         projectile.transform.rotation = rot; // muzzleMain.rotation;
         projectile.target = target; // lockOnPos;
+
+        projectile.SettingProjectileProperty(_attackDamage, _exploveRadius, _isIceBullet);
     }
 
     public void Shoot(GameObject go)

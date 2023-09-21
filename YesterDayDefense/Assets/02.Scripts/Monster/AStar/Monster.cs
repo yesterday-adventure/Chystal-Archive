@@ -42,11 +42,6 @@ public abstract class Monster : PoolableMono
         _animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
-    {
-        Reset();
-    }
-
     public void SetPosXY(int x, int y)
     {
         xIdx = x;
@@ -58,6 +53,11 @@ public abstract class Monster : PoolableMono
         InitPosition();
         InitVariable();
         FindLoad();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     public void OnDamage(int damage, bool ice)
@@ -82,7 +82,7 @@ public abstract class Monster : PoolableMono
     {
         if (CheckTower(_nextPosX, _nextPosY))
         {
-            LoadWeight.Instance.isSetup[_nextPosY, _nextPosY].Damage(_attack);
+            LoadWeight.Instance.isSetup[_nextPosX, _nextPosY].Damage(_attack);
         }
         else
         {

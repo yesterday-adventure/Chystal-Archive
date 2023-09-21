@@ -5045,12 +5045,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   turreyHead: {fileID: 4894621298927726}
-  attackDist: 7.5
-  attackDamage: 20
-  shootCoolDown: 0.5
-  loockSpeed: 100
   randomRot: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
+  _exploveRadius: 0
+  _attackDamage: 100
+  shootCoolDown: 0.5
+  lockSpeed: 100
+  attackDist: 7.5
+  _isIceBullet: 0
   turretType: 2
   muzzleMain: {fileID: 4372667440553698}
   muzzleSub: {fileID: 4535923597716192}
