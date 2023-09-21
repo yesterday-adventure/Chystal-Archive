@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretAI : MonoBehaviour {
+public class TurretAI : MonoBehaviour
+{
 
     public enum TurretType
     {
@@ -10,7 +11,7 @@ public class TurretAI : MonoBehaviour {
         Dual = 2,
         Catapult = 3,
     }
-    
+
     public GameObject currentTarget;
     public Transform turreyHead;
 
@@ -34,7 +35,7 @@ public class TurretAI : MonoBehaviour {
 
     [Header("[Turret Type]")]
     public TurretType turretType = TurretType.Single;
-    
+
     public Transform muzzleMain;
     public Transform muzzleSub;
     public PoolingParticle muzzleEff;
@@ -44,9 +45,10 @@ public class TurretAI : MonoBehaviour {
     private Transform lockOnPos;
     private PoolManager _poolManager;
 
-    //public TurretShoot_Base shotScript;
+    public bool canAttack = false;
 
-    void Start () {
+    void Start()
+    {
         _poolManager = PoolManager.Instance;
         InvokeRepeating("ChackForTarget", 0, 0.5f);
         //shotScript = GetComponent<TurretShoot_Base>();
@@ -58,42 +60,51 @@ public class TurretAI : MonoBehaviour {
 
         randomRot = new Vector3(0, Random.Range(0, 359), 0);
     }
-	
-	void Update () {
-        if (currentTarget != null)
-        {
-            FollowTarget();
 
-            float currentTargetDist = Vector3.Distance(transform.position, currentTarget.transform.position);
-            if (currentTargetDist > attackDist)
-            {
-                currentTarget = null;
-            }
-        }
-        else
-        {
-            IdleRitate();
-        }
-
-        timer += Time.deltaTime;
-        if (timer >= shootCoolDown)
+    void Update()
+    {
+        if (canAttack)
         {
             if (currentTarget != null)
             {
-                timer = 0;
-                
-                if (animator != null)
+                FollowTarget();
+
+                float currentTargetDist = Vector3.Distance(transform.position, currentTarget.transform.position);
+                if (currentTargetDist > attackDist)
                 {
-                    animator.SetTrigger("Fire");
-                    ShootTrigger();
+                    currentTarget = null;
                 }
-                else
+            }
+            else
+            {
+                IdleRitate();
+            }
+
+            timer += Time.deltaTime;
+            if (timer >= shootCoolDown)
+            {
+                if (currentTarget != null)
                 {
-                    ShootTrigger();
+                    timer = 0;
+
+                    if (animator != null)
+                    {
+                        animator.SetTrigger("Fire");
+                        ShootTrigger();
+                    }
+                    else
+                    {
+                        ShootTrigger();
+                    }
                 }
             }
         }
-	}
+    }
+
+    private void OnDisable()
+    {
+        canAttack = false;
+    }
 
     private void ChackForTarget()
     {
@@ -135,7 +146,7 @@ public class TurretAI : MonoBehaviour {
         Shoot(currentTarget);
         //Debug.Log("We shoot some stuff!");
     }
-    
+
     Vector3 CalculateVelocity(Vector3 target, Vector3 origen, float time)
     {
         Vector3 distance = target - origen;
@@ -164,7 +175,7 @@ public class TurretAI : MonoBehaviour {
     public void IdleRitate()
     {
         bool refreshRandom = false;
-        
+
         if (turreyHead.rotation != Quaternion.Euler(randomRot))
         {
             turreyHead.rotation = Quaternion.RotateTowards(turreyHead.transform.rotation, Quaternion.Euler(randomRot), lockSpeed * Time.deltaTime * 0.2f);
@@ -190,6 +201,7 @@ public class TurretAI : MonoBehaviour {
         muzzlePoolEff.transform.rotation = muzzleMain.rotation;
         muzzlePoolEff.Play();
     }
+
     private void SummonBullet(Vector3 pos, Quaternion rot, Transform target)
     {
         Projectile projectile = _poolManager.Pop(bullet.name) as Projectile;
@@ -208,9 +220,9 @@ public class TurretAI : MonoBehaviour {
 
             SummonEffect();
             SummonBullet(muzzleMain.position, muzzleMain.rotation, lockOnPos);
-            
+
         }
-        else if(turretType == TurretType.Dual)
+        else if (turretType == TurretType.Dual)
         {
             if (shootLeft)
             {

@@ -21,6 +21,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     [SerializeField]
     private BuildAbleMono _object;
     private BuildAbleMono _temp;
+    private TurretAI _tempTurretAI;
 
     public static bool IsDrag = false;
     private RectTransform _itemImageRectTrm;
@@ -64,6 +65,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         _itemImageRectTrm.SetAsLastSibling();
 
         _temp = PoolManager.Instance.Pop(_object.name) as BuildAbleMono;
+        if(_temp.GetComponentInChildren<TurretAI>() != null)
+            _tempTurretAI = _temp.GetComponentInChildren<TurretAI>();
         _itemImage.raycastTarget = false;
         _lastShopUIPointEnter = true;
     }
@@ -113,11 +116,12 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         }
         else
         {
+            if(_tempTurretAI != null)
+                _tempTurretAI.canAttack = true;
             GameManager.Instance.SpentMoney(_price);
             DropEvent?.Invoke(eventData.position);
             LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] = _temp;
         }
-
         _temp = null;
     }
 
