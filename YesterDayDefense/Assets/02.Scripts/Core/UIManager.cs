@@ -21,6 +21,9 @@ public class UIManager
 
     private TextMeshProUGUI _moneyText;
 
+    private HP _hpUI;
+    public HP HPUI => _hpUI;
+
     private bool _isShowBuildInfoPanel = false;
     private bool _isShowBuildShopPanel = false;
     public bool GetBuildInfoPanelShowed => _isShowBuildInfoPanel;
@@ -40,6 +43,7 @@ public class UIManager
         _sellBtn = _buildObjShopPanel.Find("SellBtn").GetComponent<Button>();
 
         _moneyText = gameUIPanel.Find("IngamePanel/MoneyPos/Money").GetComponent<TextMeshProUGUI>();
+        _hpUI = gameUIPanel.Find("IngamePanel/HPPos/HP").GetComponent<HP>();
     }
 
     public void OpenBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)

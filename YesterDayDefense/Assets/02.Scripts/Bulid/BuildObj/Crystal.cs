@@ -7,8 +7,13 @@ public class Crystal : BuildAbleMono
     public override void Damage(int damage)
     {
         _currentHealth -= damage;
+        
+        UIManager.Instance.HPUI.TweenHPAnim((float)_currentHealth / _maxHealth);
         if (_currentHealth <= 0)
+        {
+            
             MonsterManager.Instance.GameOver();
+        }
     }
 
     private void Start()
