@@ -20,6 +20,8 @@ public class SoundManager : MonoBehaviour
 
 
         _audioMixer.SetFloat("BGM", sound);
+
+
     }
 
     public void EffectAudioControl()
@@ -32,9 +34,10 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        _audioMixer.SetFloat("BGM", _bgmSlider.value);
-        _audioMixer.SetFloat("Effect", _effectSlider.value);
+        Debug.Log(PlayerPrefs.GetFloat("master"));
+        _masterSlider.value = PlayerPrefs.GetFloat("master");
+        _effectSlider.value = PlayerPrefs.GetFloat("effect");
+        _bgmSlider.value = PlayerPrefs.GetFloat("bgm");
     }
 
     public void ClickButtonSound()
@@ -47,6 +50,13 @@ public class SoundManager : MonoBehaviour
         float sound = _masterSlider.value;
         
         _audioMixer.SetFloat("Master", sound);
+    }
+
+    private void Update()
+    {
+        PlayerPrefs.SetFloat("master", _masterSlider.value);
+        PlayerPrefs.SetFloat("effect", _effectSlider.value);
+        PlayerPrefs.SetFloat("bgm", _bgmSlider.value);
     }
 
     private IEnumerator PlayerButton()
