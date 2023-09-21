@@ -8,6 +8,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public struct TurretInfo
+{
+    public TurretAI.TurretType attackType;
+    public int attackDamage;
+    public int attackDist;
+}
+
 public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
