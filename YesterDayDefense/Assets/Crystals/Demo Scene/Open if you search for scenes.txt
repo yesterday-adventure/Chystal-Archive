@@ -1,0 +1,1 @@
+You have to extract first the package according to your SRP (LWRP / HDRP / URP or Legacy) They are at the root of this package)
