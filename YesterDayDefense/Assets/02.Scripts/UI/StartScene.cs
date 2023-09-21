@@ -7,6 +7,7 @@ public class StartScene : MonoBehaviour
 {
     [SerializeField]
     private GameObject _settingPanel;
+    public bool Setting = false;
     private void Awake()
     {
         _settingPanel.SetActive(false);
@@ -28,9 +29,24 @@ public class StartScene : MonoBehaviour
     {
 
         _settingPanel.SetActive(true);
+        Setting = true;
     }
     public void SettingPanelExit()
     {
         _settingPanel.SetActive(false);
+        Setting = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !Setting)
+        {
+            _settingPanel.SetActive(true);
+            Setting = true;
+        }else if(Setting && Input.GetKeyDown(KeyCode.Escape))
+        {
+            _settingPanel.SetActive(false);
+            Setting = false;
+        }
     }
 }
