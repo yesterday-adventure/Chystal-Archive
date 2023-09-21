@@ -17,6 +17,10 @@ public class BuildAbleMono : PoolableMono
 {
     [Header("건물 속성값")]
     [SerializeField]
+    private BlockInfo _blockinfo;
+    public BlockInfo BlockInfo => _blockinfo;
+
+    [SerializeField]
     protected int _defaultPrice;                // 기본 가격
     protected int _currentEnhancementPrice;     // 현재 강화 비용
     [SerializeField]
@@ -25,6 +29,8 @@ public class BuildAbleMono : PoolableMono
     [SerializeField]
     protected int _currentHealth;
     protected int _maxHealth;
+
+    public int SlotUIHealth => _objects[0].Health;
 
     private int _spentToBuildPrice = 0; // 여태까지 짓는데 사용한 돈
     // 판매할 때는 여때까지 건물에 쓴 돈의 50%
@@ -68,10 +74,7 @@ public class BuildAbleMono : PoolableMono
     {
         //나중에 가중치 제거 제작
 
-        //임시 디스트로이
-        //나중에 풀매니저 푸쉬로 바꿔야 함
-        Destroy(gameObject);
-
+        PoolManager.Instance.Push(this);
         GameManager.Instance.PlusMoney(SellPrice);
         UIManager.Instance.CloseBuildObjShopPanel();
     }
@@ -85,7 +88,6 @@ public class BuildAbleMono : PoolableMono
             LoadWeight.Instance.isSetup[x, y] = null;
         }
     }
-
     protected void ShowObject(int i)
     {
         if (i < 0 || i >= _objects.Count)
@@ -135,6 +137,9 @@ public class BuildAbleMono : PoolableMono
     }
     protected virtual void OnMouseEnter()
     {
+        if (CameraMove.IsMoveScreen == true || SlotUI.IsDrag == true)
+            return;
+
         UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
             !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
             RepairPrice.ToString(),

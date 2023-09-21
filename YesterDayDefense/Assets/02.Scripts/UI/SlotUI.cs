@@ -8,11 +8,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public struct TurretInfo
+[System.Serializable]
+public struct BlockInfo
 {
-    public TurretAI.TurretType attackType;
+    public string name;
+    public int health;
     public int attackDamage;
-    public int attackDist;
+    public float attackDist;
 }
 
 public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
@@ -27,6 +29,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
     [SerializeField]
     private BuildAbleMono _object;
+
     private BuildAbleMono _temp;
     private TurretAI _tempTurretAI;
 
@@ -35,6 +38,11 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     private Image _itemImage;
     public Action<Vector2> DropEvent; // 드래그 앤 드롭 했을 때 이벤트
     private Transform _canvasTrm;
+
+    private Text _nameText;
+    private Text _hpText;
+    private Text _damageText;
+    private Text _rangeText;
 
     private bool _lastShopUIPointEnter = false;
 
@@ -47,11 +55,34 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         _canvasTrm = FindObjectOfType<Canvas>().transform;
         _price = _object.DefaultPrice;
 
-        _priceTextUI = _slotInfoUI.transform.Find("PriceText").GetComponent<Text>();
+        _priceTextUI = _slotInfoUI.transform.Find("PricePanel/PriceText").GetComponent<Text>();
         _priceTextUI.text = _price.ToString();
 
         _itemImageRectTrm = transform.Find("ItemImage").GetComponent<RectTransform>();
         _itemImage = _itemImageRectTrm.GetComponent<Image>();
+
+        BlockInfo info = _object.BlockInfo;
+
+        _nameText = _slotInfoUI.transform.Find("NamePanel/NameText").GetComponent<Text>();
+        _nameText.text = info.name;
+        _hpText = _slotInfoUI.transform.Find("InfoPanel/HPText").GetComponent<Text>();
+        _damageText = _slotInfoUI.transform.Find("InfoPanel/DamageText").GetComponent<Text>();
+        _rangeText = _slotInfoUI.transform.Find("InfoPanel/RangeText").GetComponent<Text>();
+
+        _hpText.text = (info.health.ToString());
+        _damageText.text = (info.attackDamage == 0 ? 
+            "-" : info.attackDamage.ToString());
+        _rangeText.text = (info.attackDist == 0 ?
+            "-" : info.attackDist.ToString());
+
+
+        //_object.BlockInfo
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ShowInfoUI(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -100,8 +131,6 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
         _temp.SetXY((int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1);
     }
-
-
     //드랍
     public void OnEndDrag(PointerEventData eventData)
     {

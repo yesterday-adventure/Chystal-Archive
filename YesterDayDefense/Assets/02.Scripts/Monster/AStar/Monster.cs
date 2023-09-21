@@ -58,6 +58,7 @@ public abstract class Monster : PoolableMono
 
     public void OnDamage(int damage, bool ice)
     {
+        Debug.Log("¾Æ¾ß¾Ñ");
         _curhp -= damage;
         if (_curhp <= 0)
         {

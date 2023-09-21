@@ -13,6 +13,7 @@ public class Projectile : PoolableMono
     [Header("기본 속성값")]
     public TurretAI.TurretType type = TurretAI.TurretType.Single;
     public Transform target;
+    public LayerMask targetLayer;
     public bool lockOn;
     //public bool track;
     public float speed = 1;
@@ -110,11 +111,14 @@ public class Projectile : PoolableMono
         {
             Collider[] cols =
             Physics.OverlapSphere(transform.position,
-                _exploveRadius, LayerMask.NameToLayer("Enemy"));
+                _exploveRadius, targetLayer);
 
             for(int i = 0; i < cols.Length; ++i)
+            {
+                Debug.Log($"아얏 {i}번 몬스터 {cols[i].gameObject.name}가? {_attackDamage}");
                 if (cols[i].TryGetComponent<Monster>(out Monster mob))
                     EnemyDamage(mob);
+            }
         }
         else
         {

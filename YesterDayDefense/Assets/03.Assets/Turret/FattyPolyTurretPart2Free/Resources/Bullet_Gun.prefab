@@ -64,6 +64,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   target: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
   lockOn: 0
   speed: 10
   turnSpeed: 4

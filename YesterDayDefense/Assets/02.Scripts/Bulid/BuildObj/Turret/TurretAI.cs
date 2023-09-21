@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretAI : MonoBehaviour
@@ -21,8 +22,11 @@ public class TurretAI : MonoBehaviour
 
     private float timer;
 
+    [Header("이름")]
+    [SerializeField] private string _turretName;
+
     [Header("폭발 범위")]
-    [SerializeField] private float _exploveRadius;
+    [SerializeField, Range(0f, 5f)] private float _exploveRadius;
 
     [Header("공격 속성값")]
     [SerializeField] private int _attackDamage;
@@ -30,7 +34,7 @@ public class TurretAI : MonoBehaviour
 
     [Header("공격 속성값")]
     [SerializeField] private float lockSpeed = 100.0f;
-    [SerializeField] private float attackDist = 10.0f;
+    [SerializeField] private float _attackDist = 10.0f;
     [SerializeField] private bool _isIceBullet = false;
 
     [Header("[Turret Type]")]
@@ -70,7 +74,7 @@ public class TurretAI : MonoBehaviour
                 FollowTarget();
 
                 float currentTargetDist = Vector3.Distance(transform.position, currentTarget.transform.position);
-                if (currentTargetDist > attackDist)
+                if (currentTargetDist > _attackDist)
                 {
                     currentTarget = null;
                 }
@@ -108,7 +112,7 @@ public class TurretAI : MonoBehaviour
 
     private void ChackForTarget()
     {
-        Collider[] colls = Physics.OverlapSphere(transform.position, attackDist);
+        Collider[] colls = Physics.OverlapSphere(transform.position, _attackDist);
         float distAway = Mathf.Infinity;
 
         for (int i = 0; i < colls.Length; i++)
@@ -169,7 +173,7 @@ public class TurretAI : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDist);
+        Gizmos.DrawWireSphere(transform.position, _attackDist);
     }
 
     public void IdleRitate()
@@ -247,5 +251,15 @@ public class TurretAI : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         currentTarget = target;
+    }
+
+    public BlockInfo GetInfo()
+    {
+        return new BlockInfo()
+        {
+            name = _turretName,
+            attackDamage = _attackDamage,
+            attackDist = _attackDist,
+        };
     }
 }

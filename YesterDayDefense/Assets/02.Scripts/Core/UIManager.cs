@@ -65,9 +65,12 @@ public class UIManager
     }
     public void CloseBuildInfoPanel()
     {
-        if (_isShowBuildInfoPanel == false || _isShowBuildShopPanel == true)
+        if ((_isShowBuildInfoPanel == false || _isShowBuildShopPanel == true)
+            && CameraMove.IsMoveScreen == false)
             return;
 
+        if (CameraMove.IsMoveScreen == true)
+            _isShowBuildShopPanel = false;
         _isShowBuildInfoPanel = false;
 
         Sequence seq = DOTween.Sequence();
@@ -105,7 +108,8 @@ public class UIManager
     }
     public void CloseBuildObjShopPanel()
     {
-        if (_isShowBuildShopPanel == false)
+        if (_isShowBuildShopPanel == false 
+            && CameraMove.IsMoveScreen == false)
             return;
 
         _enhancementBtn.onClick.RemoveAllListeners();
