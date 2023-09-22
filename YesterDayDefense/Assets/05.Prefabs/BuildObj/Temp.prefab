@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1406758651183463826}
   - component: {fileID: 1406758651183463831}
   - component: {fileID: 1406758651183463827}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Temp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4798259e5928b7642a1be332693c973b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useInfoUI: 1
   _blockinfo:
     name: Temp
     health: 100

@@ -15,6 +15,9 @@ public class BuildObjInfo
 
 public class BuildAbleMono : PoolableMono
 {
+    [SerializeField]
+    protected bool useInfoUI = true;
+
     [Header("건물 속성값")]
     [SerializeField]
     private BlockInfo _blockinfo;
@@ -119,24 +122,37 @@ public class BuildAbleMono : PoolableMono
     {
         if(UIManager.Instance.GetBuildShopPanelShowed == false)
         {
-            if(UIManager.Instance.GetBuildInfoPanelShowed == false)
-            {
-                UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
-                    !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
-                    RepairPrice.ToString(),
-                    SellPrice.ToString());
-            }
-            UIManager.Instance.OpenBuildObjShopPanel(transform.position + _activeObject.InfoUIOffset,
-            !FullEnhancement ? Enhancement : null,
-            Repair, Sell);
+            
         }
         else
         {
-            UIManager.Instance.CloseBuildObjShopPanel();
+            
         }
     }
-    protected virtual void OnMouseEnter()
+    public void SetXY(int _x, int _y)
     {
+        x = _x;
+        y = _y;
+    }
+    public void ShowInfo(bool show)
+    {
+        if (show)
+            OpenInfo();
+        else
+            CloseInfo();
+    }
+    public void ShowShop(bool show)
+    {
+        if (show)
+            OpenShop();
+        else
+            CloseShop();
+    }
+    private void OpenInfo()
+    {
+        if (useInfoUI == false)
+            return;
+
         if (CameraMove.IsMoveScreen == true || SlotUI.IsDrag == true)
             return;
 
@@ -145,13 +161,25 @@ public class BuildAbleMono : PoolableMono
             RepairPrice.ToString(),
             SellPrice.ToString());
     }
-    protected virtual void OnMouseExit()
+    private void CloseInfo()
     {
         UIManager.Instance.CloseBuildInfoPanel();
     }
-    public void SetXY(int _x, int _y)
+    private void OpenShop()
     {
-        x = _x;
-        y = _y;
+        if (useInfoUI == false)
+            return;
+
+        if (UIManager.Instance.GetBuildInfoPanelShowed == false)
+        {
+            OpenInfo();
+        }
+        UIManager.Instance.OpenBuildObjShopPanel(transform.position + _activeObject.InfoUIOffset,
+        !FullEnhancement ? Enhancement : null,
+        Repair, Sell);
+    }
+    private void CloseShop()
+    {
+        UIManager.Instance.CloseBuildObjShopPanel();
     }
 }

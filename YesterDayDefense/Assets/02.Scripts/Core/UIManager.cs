@@ -26,9 +26,9 @@ public class UIManager
 
     private bool _isShowBuildInfoPanel = false;
     private bool _isShowBuildShopPanel = false;
+    
     public bool GetBuildInfoPanelShowed => _isShowBuildInfoPanel;
     public bool GetBuildShopPanelShowed => _isShowBuildShopPanel;
-
 
     public UIManager(Transform gameUIPanel)
     {

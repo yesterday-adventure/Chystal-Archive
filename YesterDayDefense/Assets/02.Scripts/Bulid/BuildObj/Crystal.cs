@@ -20,8 +20,4 @@ public class Crystal : BuildAbleMono
     {
         LoadWeight.Instance.isSetup[16, 16] = this;
     }
-
-    protected override void OnMouseDown() { }
-    protected override void OnMouseEnter() { }
-    protected override void OnMouseExit() { }
 }
