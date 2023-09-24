@@ -115,7 +115,6 @@ public class Projectile : PoolableMono
 
             for(int i = 0; i < cols.Length; ++i)
             {
-                Debug.Log($"아얏 {i}번 몬스터 {cols[i].gameObject.name}가? {_attackDamage}");
                 if (cols[i].TryGetComponent<Monster>(out Monster mob))
                     EnemyDamage(mob);
             }

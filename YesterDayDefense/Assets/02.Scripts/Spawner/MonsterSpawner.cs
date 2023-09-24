@@ -60,7 +60,7 @@ public class MonsterSpawner : MonoBehaviour
 
     void StartSpawn()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < _waveData[_waveCount].SpawnDatas.Count; i++)
         {
             StartCoroutine(SpawnMonster(_waveData[_waveCount].SpawnDatas[i].MobPrefab, i));
         }

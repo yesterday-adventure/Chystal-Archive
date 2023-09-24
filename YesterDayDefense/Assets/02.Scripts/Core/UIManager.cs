@@ -15,14 +15,17 @@ public class UIManager
     private Text _sellPriceText;
 
     private Transform _buildObjShopPanel;
+    private BuildObjShopPanel _buildObjShopPanelScript;
     private Button _enhancementBtn;
     private Button _repairBtn;
     private Button _sellBtn;
+    public bool ShopBtnHover => _buildObjShopPanelScript.MouseHover;
 
     private TextMeshProUGUI _moneyText;
 
     private HP _hpUI;
     public HP HPUI => _hpUI;
+    private Image _hpFillImage;
 
     private bool _isShowBuildInfoPanel = false;
     private bool _isShowBuildShopPanel = false;
@@ -33,20 +36,23 @@ public class UIManager
     public UIManager(Transform gameUIPanel)
     {
         _buildInfoPanel = gameUIPanel.Find("BuildObjInfoPanel").transform;
-        _enhancementPriceText = _buildInfoPanel.Find("enhancementPriceText").GetComponent<Text>();
-        _repairPriceText = _buildInfoPanel.Find("repairPriceText").GetComponent<Text>();
-        _sellPriceText = _buildInfoPanel.Find("sellPriceText").GetComponent<Text>();
+        _enhancementPriceText = _buildInfoPanel.Find("HLG/enhancementPriceText").GetComponent<Text>();
+        _repairPriceText = _buildInfoPanel.Find("HLG/repairPriceText").GetComponent<Text>();
+        _sellPriceText = _buildInfoPanel.Find("HLG/sellPriceText").GetComponent<Text>();
 
         _buildObjShopPanel = gameUIPanel.Find("BuildObjShopPanel").transform;
+        _buildObjShopPanelScript = _buildObjShopPanel.GetComponent<BuildObjShopPanel>();
         _enhancementBtn = _buildObjShopPanel.Find("EnhancementBtn").GetComponent<Button>();
         _repairBtn = _buildObjShopPanel.Find("RepairBtn").GetComponent<Button>();
         _sellBtn = _buildObjShopPanel.Find("SellBtn").GetComponent<Button>();
 
         _moneyText = gameUIPanel.Find("IngamePanel/MoneyPos/Money").GetComponent<TextMeshProUGUI>();
         _hpUI = gameUIPanel.Find("IngamePanel/HPPos/HP").GetComponent<HP>();
+        _hpFillImage = _buildInfoPanel.Find("HPBar/HPFill").GetComponent<Image>();
     }
 
-    public void OpenBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice)
+    public void OpenBuildInfoPanel(Vector3 pos, string enhancementPrice, string repairPrice, string sellPrice
+        , float hpPercent)
     {
         if (_isShowBuildInfoPanel == true)
             return;
@@ -57,11 +63,17 @@ public class UIManager
         _repairPriceText.text       = repairPrice;
         _sellPriceText.text         = sellPrice;
 
+        _hpFillImage.fillAmount = hpPercent;
+
         _buildInfoPanel.position = Camera.main.WorldToScreenPoint(pos);
-        _buildInfoPanel.gameObject.SetActive(true);
         _buildInfoPanel.DOKill();
         _buildInfoPanel.localScale = new Vector3(0, 1, 1);
         _buildInfoPanel.DOScaleX(1, 0.2f);
+    }
+    public void BuildInfoUpdate(string repairPrice, float hpPercent)
+    {
+        _repairPriceText.text = repairPrice;
+        _hpFillImage.fillAmount = hpPercent;
     }
     public void CloseBuildInfoPanel()
     {
@@ -73,13 +85,7 @@ public class UIManager
             _isShowBuildShopPanel = false;
         _isShowBuildInfoPanel = false;
 
-        Sequence seq = DOTween.Sequence();
-        seq.Append(_buildInfoPanel.DOScaleX(0, 0.2f))
-            .OnComplete(() =>
-            {
-                _buildInfoPanel.gameObject.SetActive(false);
-            });
-        
+        _buildInfoPanel.DOScaleX(0, 0.2f);
     }
     public void OpenBuildObjShopPanel(Vector3 pos, Action enhancement, Action repair, Action sell)
     {
@@ -103,7 +109,7 @@ public class UIManager
         _buildObjShopPanel.position = screenPos;
         _buildObjShopPanel.DOKill();
         Sequence seq = DOTween.Sequence();
-        seq.Append(_buildObjShopPanel.DOMoveY(screenPos.y + 80, 0.3f))
+        seq.Append(_buildObjShopPanel.DOMoveY(screenPos.y - 100, 0.3f))
             .Join(_buildObjShopPanel.DOScale(Vector3.one, 0.3f));
     }
     public void CloseBuildObjShopPanel()

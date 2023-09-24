@@ -42,6 +42,7 @@ public class BuildAbleMono : PoolableMono
     public int DefaultPrice => _defaultPrice;
 
     public bool FullEnhancement => _enhancementValue == _objects.Count - 1;
+    private bool _isShowBuildInfo = false;
 
     [Header("건물 강화 오브젝트 정보")]
     [SerializeField]
@@ -51,6 +52,19 @@ public class BuildAbleMono : PoolableMono
 
     private int x;
     private int y;
+    private void DestroyObject() //파괴됨
+    {
+        if (_isShowBuildInfo == false)
+            return;
+
+        if (UIManager.Instance.GetBuildShopPanelShowed == true)
+            CloseShop();
+        else if (UIManager.Instance.GetBuildInfoPanelShowed == true)
+            CloseInfo();
+
+        PoolManager.Instance.Push(this);
+
+    }
     public void Enhancement()
     {
         if (GameManager.Instance.Money < _currentEnhancementPrice)
@@ -69,22 +83,28 @@ public class BuildAbleMono : PoolableMono
         if (GameManager.Instance.Money < RepairPrice)
             return;
 
-        UIManager.Instance.CloseBuildObjShopPanel();
         GameManager.Instance.SpentMoney(RepairPrice);
         _currentHealth = _maxHealth;
+        UIManager.Instance.BuildInfoUpdate(
+            RepairPrice.ToString(), (float)_currentHealth / _maxHealth);
     }
     public void Sell()
     {
         //나중에 가중치 제거 제작
-
-        PoolManager.Instance.Push(this);
         GameManager.Instance.PlusMoney(SellPrice);
-        UIManager.Instance.CloseBuildObjShopPanel();
+        DestroyObject();
     }
 
     public virtual void Damage(int damage)
     {
         _currentHealth -= damage;
+
+        if(_isShowBuildInfo == true)
+        {
+            UIManager.Instance.BuildInfoUpdate(
+                RepairPrice.ToString(), (float)_currentHealth / _maxHealth);
+        }
+        
         if (_currentHealth <= 0)
         {
             PoolManager.Instance.Push(this);
@@ -118,17 +138,7 @@ public class BuildAbleMono : PoolableMono
         _enhancementValue = 0;
         ShowObject(0);
     }
-    protected virtual void OnMouseDown()
-    {
-        if(UIManager.Instance.GetBuildShopPanelShowed == false)
-        {
-            
-        }
-        else
-        {
-            
-        }
-    }
+
     public void SetXY(int _x, int _y)
     {
         x = _x;
@@ -156,13 +166,16 @@ public class BuildAbleMono : PoolableMono
         if (CameraMove.IsMoveScreen == true || SlotUI.IsDrag == true)
             return;
 
+        _isShowBuildInfo = true;
         UIManager.Instance.OpenBuildInfoPanel(transform.position + _activeObject.InfoUIOffset,
             !FullEnhancement ? _currentEnhancementPrice.ToString() : "X",
             RepairPrice.ToString(),
-            SellPrice.ToString());
+            SellPrice.ToString(),
+            (float)_currentHealth / _maxHealth);
     }
     private void CloseInfo()
     {
+        _isShowBuildInfo = false;
         UIManager.Instance.CloseBuildInfoPanel();
     }
     private void OpenShop()
