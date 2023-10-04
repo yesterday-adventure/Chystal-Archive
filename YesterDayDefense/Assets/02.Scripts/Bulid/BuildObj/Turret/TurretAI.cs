@@ -51,16 +51,19 @@ public class TurretAI : MonoBehaviour
 
     public bool canAttack = false;
 
+    private readonly int _animationIdleHash = Animator.StringToHash("Idle");
+    private readonly int _animationFireHash = Animator.StringToHash("Fire");
+    private readonly int _animationReloadHash = Animator.StringToHash("Reload");
+    private readonly int _animationInstallHash = Animator.StringToHash("Install");
+    private readonly int _animationRemoveHash = Animator.StringToHash("Remove");
+
+    private bool _isDie = false;
+
     void Start()
     {
         _poolManager = PoolManager.Instance;
         InvokeRepeating("ChackForTarget", 0, 0.5f);
         //shotScript = GetComponent<TurretShoot_Base>();
-
-        if (transform.GetChild(0).GetComponent<Animator>())
-        {
-            animator = transform.GetChild(0).GetComponent<Animator>();
-        }
 
         randomRot = new Vector3(0, Random.Range(0, 359), 0);
     }
@@ -93,7 +96,7 @@ public class TurretAI : MonoBehaviour
 
                     if (animator != null)
                     {
-                        animator.SetTrigger("Fire");
+                        animator.SetTrigger(_animationFireHash);
                         ShootTrigger();
                     }
                     else
@@ -246,6 +249,8 @@ public class TurretAI : MonoBehaviour
             SummonEffect();
             SummonBullet(muzzleMain.position, muzzleMain.rotation, currentTarget.transform);
         }
+
+        animator.SetTrigger(_animationReloadHash);
     }
 
     public void SetTarget(GameObject target)
@@ -261,5 +266,9 @@ public class TurretAI : MonoBehaviour
             attackDamage = _attackDamage,
             attackDist = _attackDist,
         };
+    }
+    public void DestroyAnimation()
+    {
+        animator.SetTrigger(_animationRemoveHash);
     }
 }
