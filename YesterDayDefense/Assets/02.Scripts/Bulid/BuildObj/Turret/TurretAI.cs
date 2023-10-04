@@ -54,10 +54,8 @@ public class TurretAI : MonoBehaviour
     private readonly int _animationIdleHash = Animator.StringToHash("Idle");
     private readonly int _animationFireHash = Animator.StringToHash("Fire");
     private readonly int _animationReloadHash = Animator.StringToHash("Reload");
-    private readonly int _animationInstallHash = Animator.StringToHash("Install");
-    private readonly int _animationRemoveHash = Animator.StringToHash("Remove");
-
-    private bool _isDie = false;
+    //private readonly int _animationInstallHash = Animator.StringToHash("Install");
+    //private readonly int _animationRemoveHash = Animator.StringToHash("Remove");
 
     void Start()
     {
@@ -227,6 +225,7 @@ public class TurretAI : MonoBehaviour
 
             SummonEffect();
             SummonBullet(muzzleMain.position, muzzleMain.rotation, lockOnPos);
+            animator.SetTrigger(_animationReloadHash);
 
         }
         else if (turretType == TurretType.Dual)
@@ -248,9 +247,10 @@ public class TurretAI : MonoBehaviour
         {
             SummonEffect();
             SummonBullet(muzzleMain.position, muzzleMain.rotation, currentTarget.transform);
+            animator.SetTrigger(_animationReloadHash);
         }
 
-        animator.SetTrigger(_animationReloadHash);
+        
     }
 
     public void SetTarget(GameObject target)
@@ -266,9 +266,5 @@ public class TurretAI : MonoBehaviour
             attackDamage = _attackDamage,
             attackDist = _attackDist,
         };
-    }
-    public void DestroyAnimation()
-    {
-        animator.SetTrigger(_animationRemoveHash);
     }
 }

@@ -18,6 +18,9 @@ public class BuildAbleMono : PoolableMono
     [SerializeField]
     protected bool useInfoUI = true;
 
+    [Header("가중치")]
+    [SerializeField] private int _weight;
+
     [Header("건물 속성값")]
     [SerializeField]
     private BlockInfo _blockinfo;
@@ -62,8 +65,10 @@ public class BuildAbleMono : PoolableMono
         else if (UIManager.Instance.GetBuildInfoPanelShowed == true)
             CloseInfo();
 
-        PoolManager.Instance.Push(this);
+        //가중치 제거
+        //LoadWeight.Instance.ChangeWeight(x, y, 0, _weight);
 
+        PoolManager.Instance.Push(this);
     }
     public void Enhancement()
     {
