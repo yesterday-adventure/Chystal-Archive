@@ -5,6 +5,11 @@ using UnityEngine;
 
 public abstract class Monster : PoolableMono
 {
+    [Header("사운드")]
+    [SerializeField] private AudioSource _attackSound;
+    [SerializeField] private AudioSource _damage;
+    [SerializeField] private AudioSource _dieSound;
+
     [Header("정보")]
     [SerializeField] private int _hp;
     [SerializeField] private int _attack;
@@ -58,12 +63,16 @@ public abstract class Monster : PoolableMono
 
     public void OnDamage(int damage, bool ice)
     {
+        // 데미지 사운드 재생
+
         _curhp -= damage;
+        _damage.Play(); 
         if (_curhp <= 0)
         {
             _animator.SetBool(_dieHash, true);
             StopAllCoroutines() ;
             StartCoroutine(IDie());
+            _dieSound.Play();
         }
 
         if (ice == true)
@@ -79,6 +88,8 @@ public abstract class Monster : PoolableMono
     {
         if (CheckTower(_nextPosX, _nextPosY))
         {
+            //공격 사운드
+            _attackSound.Play();
             LoadWeight.Instance.isSetup[_nextPosX, _nextPosY].Damage(_attack);
         }
         else
