@@ -11,4 +11,6 @@ public class Spawner
     public int          _xidx;      // xÁÂÇ¥
     [Range(0,31)] // yÁÂÇ¥ ¹üÀ§ <- MapMangerÂü°í
     public int          _yidx;      // yÁÂÇ¥
+    [Range(0f, 2f)]
+    public float        _spawnDelay; // ¼ÒÈ¯ µô·¹ÀÌ
 }

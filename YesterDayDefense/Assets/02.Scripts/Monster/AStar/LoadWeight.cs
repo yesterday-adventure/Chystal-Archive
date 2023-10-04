@@ -26,8 +26,16 @@ public class LoadWeight : MonoBehaviour
             Debug.LogError($"{transform} : LoadWeight is multiple running!");
     }
 
-    public void ChangeWeight(int x, int y, int val)
+    /// <summary>
+    /// 가중치 값을 바꾼뒤 맵에 적용
+    /// </summary>
+    /// <param name="x">터렛의 X포지션</param>
+    /// <param name="y">터렛의 y포지션</param>
+    /// <param name="val">변경될 가중치 값</param>
+    /// <param name="originVal">변경되기 전 가중치 값</param>
+    public void ChangeWeight(int x, int y, int val, int originVal)
     {
+        weight[x, y] -= originVal;
         weight[x, y] += val;
         InitEndVal();
     }
