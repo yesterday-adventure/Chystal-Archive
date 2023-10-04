@@ -46,15 +46,15 @@ public class Projectile : PoolableMono
         {
             Explosion();
         }
-
-        boomTimer -= Time.deltaTime;
-        if (boomTimer < 0)
-        {
-            Explosion();
-        }
+        
 
         if (type == TurretAI.TurretType.Catapult)
         {
+            boomTimer -= Time.deltaTime;
+            if (boomTimer < 0)
+            {
+                Explosion();
+            }
             if (lockOn)
             {
                 Vector3 Vo = CalculateCatapult(target.transform.position, transform.position, 1);
@@ -143,6 +143,8 @@ public class Projectile : PoolableMono
     }
     public void Explosion()
     {
+        Debug.Log("사라짐");
+
         if (explosion != null)
         {
             PoolingParticle explosionParticle = 
@@ -166,6 +168,7 @@ public class Projectile : PoolableMono
         {
             Vector3 dir = target.position - transform.position;
             transform.rotation = Quaternion.LookRotation(dir);
+            
         }
 
         if (type == TurretAI.TurretType.Catapult)

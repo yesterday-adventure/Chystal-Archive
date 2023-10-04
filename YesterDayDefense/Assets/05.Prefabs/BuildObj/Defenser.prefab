@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useInfoUI: 1
+  _weight: 5
   _blockinfo:
     name: Defenser
     health: 500
