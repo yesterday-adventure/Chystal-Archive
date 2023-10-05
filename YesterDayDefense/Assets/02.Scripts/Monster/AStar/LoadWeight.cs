@@ -161,6 +161,8 @@ public class LoadWeight : MonoBehaviour
         {
             for (int j = 1; j < 32; j++)
             {
+                if (endVal[i, j] < 100)
+                    s += 0;
                 if (endVal[i, j] < 10)
                     s += 0;
                 s += endVal[i, j];
