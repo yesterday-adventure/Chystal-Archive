@@ -156,6 +156,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
             GameManager.Instance.SpentMoney(_price);
             DropEvent?.Invoke(eventData.position);
             LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] = _temp;
+            LoadWeight.Instance.ChangeWeight((int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1,_temp.Weight,0);
         }
         _temp = null;
     }

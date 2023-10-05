@@ -20,6 +20,7 @@ public class BuildAbleMono : PoolableMono
 
     [Header("가중치")]
     [SerializeField] private int _weight;
+    public int Weight => _weight;
 
     [Header("건물 속성값")]
     [SerializeField]
@@ -66,7 +67,8 @@ public class BuildAbleMono : PoolableMono
             CloseInfo();
 
         //가중치 제거
-        //LoadWeight.Instance.ChangeWeight(x, y, 0, _weight);
+        LoadWeight.Instance.ChangeWeight(x, y, 0, _weight);
+
 
         PoolManager.Instance.Push(this);
     }

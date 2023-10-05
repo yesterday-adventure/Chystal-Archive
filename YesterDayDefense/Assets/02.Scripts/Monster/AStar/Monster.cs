@@ -156,7 +156,11 @@ public abstract class Monster : PoolableMono
             while (Mathf.Abs(transform.position.x - nextMapPostion.x) > 0.1f ||
                 Mathf.Abs(transform.position.z - nextMapPostion.z) > 0.1f)
             {
-                transform.position += dir * _speed * Time.deltaTime;
+                if(isSlow)
+                    transform.position += dir * (_speed / 2) * Time.deltaTime;
+                else
+                    transform.position += dir * _speed * Time.deltaTime;
+
                 yield return null;
             }
 
@@ -171,7 +175,7 @@ public abstract class Monster : PoolableMono
 
     IEnumerator IDie()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
 
         PoolManager.Instance.Push(this);
     }
