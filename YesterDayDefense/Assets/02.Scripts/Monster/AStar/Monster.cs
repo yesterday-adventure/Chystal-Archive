@@ -14,6 +14,7 @@ public abstract class Monster : PoolableMono
     [SerializeField] private int _hp;
     [SerializeField] private int _attack;
     [SerializeField] private float _speed;
+    [SerializeField] private int _money;
     private int _curhp;
 
     [Header("À§Ä¡")]
@@ -32,6 +33,8 @@ public abstract class Monster : PoolableMono
     protected readonly int _overHash = Animator.StringToHash("IsOver");
     public int OverHash => _overHash;
     protected readonly int _attackHash = Animator.StringToHash("IsAttack");
+
+    private bool _isDie;
 
     private XY _nexpos;
     private int _nextPosX;
@@ -55,6 +58,7 @@ public abstract class Monster : PoolableMono
 
     public override void Reset()
     {
+        _isDie = false;
         StopAllCoroutines();
         InitPosition();
         InitVariable();
@@ -67,8 +71,10 @@ public abstract class Monster : PoolableMono
 
         _curhp -= damage;
         _damage.Play(); 
-        if (_curhp <= 0)
+        if (_curhp <= 0 && _isDie == false)
         {
+            _isDie = true;
+            GameManager.Instance.PlusMoney(_money);
             _animator.SetBool(_dieHash, true);
             StopAllCoroutines() ;
             StartCoroutine(IDie());

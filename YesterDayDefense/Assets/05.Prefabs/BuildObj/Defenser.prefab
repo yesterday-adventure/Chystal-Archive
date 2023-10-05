@@ -47,18 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useInfoUI: 1
-  _weight: 100
+  _weight: 5
   _blockinfo:
     name: Defenser
-    health: 1000
+    health: 500
     attackDamage: 0
     attackDist: 0
-  _defaultPrice: 100
+  _defaultPrice: 50
   _enhancementValue: 0
   _currentHealth: 0
   _objects:
   - Obj: {fileID: 4761006163076312674}
-    Health: 1000
+    Health: 500
     InfoUIOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &4761006161682625959
 BoxCollider:

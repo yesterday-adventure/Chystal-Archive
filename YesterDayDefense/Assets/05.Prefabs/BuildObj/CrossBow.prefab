@@ -54944,7 +54944,7 @@ MonoBehaviour:
   animator: {fileID: 4770619536253602026}
   _turretName: CrossBow
   _exploveRadius: 0
-  _attackDamage: 30
+  _attackDamage: 50
   shootCoolDown: 2
   lockSpeed: 100
   _attackDist: 30
@@ -60319,7 +60319,7 @@ MonoBehaviour:
   _blockinfo:
     name: CrossBow
     health: 200
-    attackDamage: 30
+    attackDamage: 50
     attackDist: 30
   _defaultPrice: 400
   _enhancementValue: 0

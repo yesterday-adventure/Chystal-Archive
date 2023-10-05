@@ -70,7 +70,9 @@ public class TurretAI : MonoBehaviour
     {
         if (canAttack)
         {
-            if (currentTarget != null)
+            if (currentTarget != null && !currentTarget.activeInHierarchy)
+                IdleRitate();
+            else if (currentTarget != null)
             {
                 FollowTarget();
 
@@ -88,7 +90,7 @@ public class TurretAI : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= shootCoolDown)
             {
-                if (currentTarget != null)
+                if (currentTarget != null && currentTarget.activeInHierarchy)
                 {
                     timer = 0;
 
@@ -180,7 +182,9 @@ public class TurretAI : MonoBehaviour
     public void IdleRitate()
     {
         bool refreshRandom = false;
-
+        animator.SetTrigger(_animationIdleHash);
+        animator.ResetTrigger(_animationFireHash);
+        animator.ResetTrigger(_animationReloadHash);
         if (turreyHead.rotation != Quaternion.Euler(randomRot))
         {
             turreyHead.rotation = Quaternion.RotateTowards(turreyHead.transform.rotation, Quaternion.Euler(randomRot), lockSpeed * Time.deltaTime * 0.2f);
