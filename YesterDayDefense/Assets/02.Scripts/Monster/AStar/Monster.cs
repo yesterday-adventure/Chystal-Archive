@@ -183,6 +183,7 @@ public abstract class Monster : PoolableMono
     {
         yield return new WaitForSeconds(0.5f);
 
+        transform.SetParent(null);
         PoolManager.Instance.Push(this);
     }
 }

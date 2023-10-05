@@ -13,6 +13,13 @@ public class MonsterManager : MonoBehaviour
         else
             Debug.LogError($"{transform} : MonsterManager is multiply running");
     }
+
+    private void FixedUpdate()
+    {
+        if(transform.childCount == 0 && WaveTimeline.Instance.isOver)
+            GameManager.Instance.isGameClear = true;
+    }
+
     public void GameOver()
     {
         Monster[] monsters= GetComponentsInChildren<Monster>();

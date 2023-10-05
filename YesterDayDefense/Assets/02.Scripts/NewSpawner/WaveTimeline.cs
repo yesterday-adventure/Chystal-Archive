@@ -15,6 +15,8 @@ public class WaveType
 
 public class WaveTimeline : MonoBehaviour
 {
+    public static WaveTimeline Instance;
+
     [Header("UI")]
     [SerializeField] private GameObject _waveImage;
     [SerializeField] private Slider _waveSlider;
@@ -26,6 +28,18 @@ public class WaveTimeline : MonoBehaviour
     [SerializeField] WaveType[] _waveTypes;
 
     public float _curWaveTime = 0f;
+    public bool isOver = false;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            Debug.LogError($"{transform} : WaveTimeline is multiple running!");
+        }
+    }
 
     private void Start()
     {
@@ -46,6 +60,9 @@ public class WaveTimeline : MonoBehaviour
     {
         _curWaveTime += Time.deltaTime;
         _waveSlider.value = _curWaveTime / _maxTimer;
+
+        if(_curWaveTime > _maxTimer)
+            isOver = true;
     }
 
     private void FixedUpdate()
