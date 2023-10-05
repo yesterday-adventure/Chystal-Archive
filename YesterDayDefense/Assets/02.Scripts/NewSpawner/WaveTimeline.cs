@@ -63,7 +63,7 @@ public class WaveTimeline : MonoBehaviour
     {
         foreach (Spawner spawner in spawners)
         {
-            StartWave(spawner);
+            StartCoroutine(StartWave(spawner));
         }
     }
 
