@@ -68,7 +68,7 @@ public class BuildAbleMono : PoolableMono
 
         //가중치 제거
         LoadWeight.Instance.ChangeWeight(x, y, 0, _weight);
-
+        LoadWeight.Instance.isSetup[x, y] = null;
 
         PoolManager.Instance.Push(this);
     }
