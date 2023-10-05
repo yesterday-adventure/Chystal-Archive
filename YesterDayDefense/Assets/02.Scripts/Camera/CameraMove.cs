@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,22 @@ public class CameraMove : MonoBehaviour
     Vector3 _lastMousePos;
     Vector3 _mousePos;
     BuildAbleMono _currentBuildObj = null;
+    [SerializeField]CinemachineVirtualCamera _cmvcam;
+    float tempVal;
+    int scrollSpeed = 10;
+    private void Update()
+    {
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        tempVal = wheelInput * scrollSpeed + _cmvcam.m_Lens.FieldOfView;
+        if (wheelInput > 0)
+        {
+            _cmvcam.m_Lens.FieldOfView = Mathf.Min(tempVal,80);
+        }
+        else if (wheelInput < 0)
+        {
+            _cmvcam.m_Lens.FieldOfView = Mathf.Max(tempVal,60);
+        }
+    }
 
     private void LateUpdate()
     {
