@@ -181,7 +181,7 @@ public abstract class Monster : PoolableMono
 
     IEnumerator IDie()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         PoolManager.Instance.Push(this);
     }

@@ -36,7 +36,8 @@ public class WaveTimeline : MonoBehaviour
                 RectTransform rt = PoolManager.Instance.Pop(_waveImage.name).GetComponent<RectTransform>();
                 rt.parent = _waveSlider.transform;
                 //-240 ~ 240
-                rt.anchoredPosition = new Vector2(-240 + (480 /(_waveTypes[i].spawnTime / _maxTimer)),17.1f);
+                rt.anchoredPosition = new Vector2(-240 + (480 *(_waveTypes[i].spawnTime / _maxTimer)),17.1f);
+                rt.localScale = new Vector3(1, 1, 1);
             }
         }
     }
