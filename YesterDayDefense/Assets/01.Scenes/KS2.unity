@@ -313,117 +313,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149437556}
   m_CullTransparentMesh: 1
---- !u!1 &188916054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 188916055}
-  - component: {fileID: 188916056}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &188916055
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188916054}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.8, y: 0, z: 8.12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 522076970}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &188916056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188916054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83cb08f2fc509c744bda554612172389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _waveImage:
-  - {fileID: 855948646}
-  - {fileID: 123824860}
-  _waveSlider: {fileID: 1094440560}
-  _waveTime: 0
-  _changeSpawnTime:
-  - changeSpawnTime: 10
-  - changeSpawnTime: 20
-  _waveData:
-  - SpawnDatas:
-    - MobPrefab: {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
-      x: 5
-      y: 5
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 2
-    - MobPrefab: {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      x: 20
-      y: 20
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 3
-    - MobPrefab: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      x: 27
-      y: 27
-      SpawnCount: 4
-      SpawnDelay: 1
-      SpawnTerm: 4
-  - SpawnDatas:
-    - MobPrefab: {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
-      x: 5
-      y: 5
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 2
-    - MobPrefab: {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      x: 20
-      y: 20
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 3
-    - MobPrefab: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      x: 27
-      y: 27
-      SpawnCount: 4
-      SpawnDelay: 1
-      SpawnTerm: 4
-  - SpawnDatas:
-    - MobPrefab: {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
-      x: 5
-      y: 5
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 2
-    - MobPrefab: {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      x: 20
-      y: 20
-      SpawnCount: 5
-      SpawnDelay: 1
-      SpawnTerm: 3
-    - MobPrefab: {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      x: 27
-      y: 27
-      SpawnCount: 4
-      SpawnDelay: 1
-      SpawnTerm: 4
-  _waveCount: 0
 --- !u!1 &192652583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,7 +1328,7 @@ Transform:
   - {fileID: 579620846}
   - {fileID: 422104160}
   - {fileID: 1265351403}
-  - {fileID: 188916055}
+  - {fileID: 1834475745}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2971,7 +2860,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999187875}
-  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 25, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3816,7 +3705,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144537105}
-  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 15, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5073,6 +4962,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774674001}
   m_CullTransparentMesh: 1
+--- !u!1 &1834475744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1834475745}
+  - component: {fileID: 1834475746}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1834475745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834475744}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -34.8, y: 0, z: 8.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 522076970}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834475746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834475744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ce7c6001d2b5942a35565c39f3ad79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waveImage: {fileID: 1696837932829014018, guid: 14175552359f8744ea14045d8539fb07, type: 3}
+  _waveSlider: {fileID: 0}
+  _maxTimer: 120
+  _waveTypes:
+  - spawners:
+    - monsters: []
+      cnts: 
+      xidx: 0
+      yidx: 0
+      spawnDelay: 0
+    - monsters: []
+      cnts: 
+      xidx: 0
+      yidx: 0
+      spawnDelay: 0
+    spawnTime: 0
+    _isStart: 0
+  _curWaveTime: 0
 --- !u!1 &1842142809
 GameObject:
   m_ObjectHideFlags: 0
