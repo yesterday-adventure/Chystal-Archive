@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     [field:SerializeField]
     public int Money { get; private set; } = 0;
 
+    [field: SerializeField]
+    public int TurretCount { get; private set; } = 0;
+    public float TurretVat => (1f + (0.201f * TurretCount));
+
     public Transform monsterParentTrm;
     private UIManager _uiManager;
 
@@ -55,6 +59,15 @@ public class GameManager : MonoBehaviour
     {
         Money -= spent;
         _uiManager.SetMoneyText(Money, true);
+    }
+
+    public void PlusTurret()
+    {
+        TurretCount++;
+    }
+    public void MinusTurret()
+    {
+        TurretCount--;
     }
 
     public void GameOver()

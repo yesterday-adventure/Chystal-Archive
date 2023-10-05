@@ -154,6 +154,7 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
             if(_tempTurretAI != null)
                 _tempTurretAI.canAttack = true;
             GameManager.Instance.SpentMoney(_price);
+            GameManager.Instance.PlusTurret();
             DropEvent?.Invoke(eventData.position);
             LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] = _temp;
             LoadWeight.Instance.ChangeWeight((int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1,_temp.Weight,0);
@@ -165,6 +166,12 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     {
         if (IsDrag == true)
             return;
+        if(show == true)
+        {
+            _price = _object.DefaultPrice;
+            _priceTextUI.text = _price.ToString();
+        }
+
         _slotInfoUI.SetActive(show);
         _slotInfoUI.transform.DOKill();
         _slotInfoUI.transform.DOScaleX(show ? 1 : 0, 0.2f);

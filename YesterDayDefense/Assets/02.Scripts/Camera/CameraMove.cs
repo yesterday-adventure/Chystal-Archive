@@ -23,11 +23,11 @@ public class CameraMove : MonoBehaviour
         tempVal = wheelInput * scrollSpeed + _cmvcam.m_Lens.FieldOfView;
         if (wheelInput > 0)
         {
-            _cmvcam.m_Lens.FieldOfView = Mathf.Min(tempVal,80);
+            _cmvcam.m_Lens.FieldOfView = Mathf.Max(tempVal,60);
         }
         else if (wheelInput < 0)
         {
-            _cmvcam.m_Lens.FieldOfView = Mathf.Max(tempVal,60);
+            _cmvcam.m_Lens.FieldOfView = Mathf.Min(tempVal,80);
         }
     }
 
