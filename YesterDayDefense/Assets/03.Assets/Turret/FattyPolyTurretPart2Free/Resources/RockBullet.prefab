@@ -104,12 +104,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   lockOn: 0
-  speed: 1
+  speed: 10
   turnSpeed: 1
-  catapult: 0
+  catapult: 1
   knockBack: 0.1
-  boomTimer: 1
-  explosion: {fileID: 0}
+  boomTimer: 10
+  explosion: {fileID: -9142492813441582477, guid: 6d074a749488789479e539251fdf184e, type: 3}
 --- !u!135 &4763695628909641624
 SphereCollider:
   m_ObjectHideFlags: 0

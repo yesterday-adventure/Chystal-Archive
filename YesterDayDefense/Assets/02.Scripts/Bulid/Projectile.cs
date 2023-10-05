@@ -22,7 +22,7 @@ public class Projectile : PoolableMono
 
     public float knockBack = 0.1f;
     public float boomTimer = 1;
-    private readonly float _defaultBoomTimeLimit = 1f;
+    private readonly float _defaultBoomTimeLimit = 10f;
     //public Vector3 _startPosition;
     //public float dist;
 
