@@ -371,6 +371,7 @@ MonoBehaviour:
     spawnTime: 60
     _isStart: 0
   _curWaveTime: 0
+  isOver: 0
 --- !u!1 &192652583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,7 +2923,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999187875}
-  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 25, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3271,7 +3272,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144537105}
-  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 15, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4163,9 +4164,10 @@ MonoBehaviour:
   - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
   - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
   - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
-  <Money>k__BackingField: 1000
+  <Money>k__BackingField: 1500
   <TurretCount>k__BackingField: 0
   monsterParentTrm: {fileID: 1265351403}
+  isGameClear: 0
 --- !u!1 &1445654648
 GameObject:
   m_ObjectHideFlags: 0

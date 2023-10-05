@@ -154,7 +154,8 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
             if(_tempTurretAI != null)
                 _tempTurretAI.canAttack = true;
             GameManager.Instance.SpentMoney(_price);
-            GameManager.Instance.PlusTurret();
+            if(_object.IsNotTurret == false)
+                GameManager.Instance.PlusTurret();
             DropEvent?.Invoke(eventData.position);
             LoadWeight.Instance.isSetup[(int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1] = _temp;
             LoadWeight.Instance.ChangeWeight((int)(_tempWorldPos.x / 2) + 1, (int)(_tempWorldPos.z / 2) + 1,_temp.Weight,0);

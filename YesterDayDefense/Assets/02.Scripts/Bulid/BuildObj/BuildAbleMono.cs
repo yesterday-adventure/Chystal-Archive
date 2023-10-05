@@ -20,6 +20,7 @@ public class BuildAbleMono : PoolableMono
     protected bool useInfoUI = true;
     [SerializeField]
     private bool _isNotTurret = false;
+    public bool IsNotTurret => _isNotTurret;
 
     [Header("°¡ÁßÄ¡")]
     [SerializeField] private int _weight;
