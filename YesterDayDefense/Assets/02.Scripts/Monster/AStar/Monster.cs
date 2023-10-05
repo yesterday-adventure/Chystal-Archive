@@ -13,7 +13,7 @@ public abstract class Monster : PoolableMono
     [Header("정보")]
     [SerializeField] private int _hp;
     [SerializeField] private int _attack;
-    [SerializeField] private int _speed;
+    [SerializeField] private float _speed;
     private int _curhp;
 
     [Header("위치")]
