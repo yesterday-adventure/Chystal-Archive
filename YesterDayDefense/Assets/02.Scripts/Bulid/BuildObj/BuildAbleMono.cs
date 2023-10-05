@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,6 +18,9 @@ public class BuildAbleMono : PoolableMono
 {
     [SerializeField]
     protected bool useInfoUI = true;
+    [SerializeField]
+    private bool _isNotTurret = false;
+    public bool IsNotTurret => _isNotTurret;
 
     [Header("가중치")]
     [SerializeField] private int _weight;
@@ -43,7 +47,17 @@ public class BuildAbleMono : PoolableMono
     // 판매할 때는 여때까지 건물에 쓴 돈의 50%
     public int SellPrice => _spentToBuildPrice / 2;
     public int RepairPrice => (int)(_spentToBuildPrice * (1.0f-(float)_currentHealth / _maxHealth) * 0.5f);
-    public int DefaultPrice => _defaultPrice;
+    public int DefaultPrice
+    {
+        get
+        {
+            if (GameManager.Instance == null
+                || _isNotTurret == true)
+                return _defaultPrice;
+
+            return (int)(_defaultPrice * GameManager.Instance.TurretVat);
+        }
+    }
 
     public bool FullEnhancement => _enhancementValue == _objects.Count - 1;
     private bool _isShowBuildInfo = false;
@@ -70,7 +84,9 @@ public class BuildAbleMono : PoolableMono
         LoadWeight.Instance.ChangeWeight(x, y, 0, _weight);
         LoadWeight.Instance.isSetup[x, y] = null;
 
+        GameManager.Instance.MinusTurret();
         PoolManager.Instance.Push(this);
+
     }
     public void Enhancement()
     {
