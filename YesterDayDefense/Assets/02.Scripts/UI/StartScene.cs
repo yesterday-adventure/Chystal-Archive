@@ -7,9 +7,13 @@ public class StartScene : MonoBehaviour
 {
     [SerializeField]
     private GameObject _settingPanel;
+    [SerializeField]
+    private GameObject _stageSelectPanel;
     public bool Setting = false;
+    public bool Stage = false;
     private void Awake()
     {
+        _stageSelectPanel.SetActive(false);
         _settingPanel.SetActive(false);
     }
     public void GameStart(string name)
@@ -35,6 +39,18 @@ public class StartScene : MonoBehaviour
     {
         _settingPanel.SetActive(false);
         Setting = false;
+    }
+
+    public void StageSelectPanel()
+    {
+
+        _stageSelectPanel.SetActive(true);
+        Stage = true;
+    }
+    public void StageSelectExit()
+    {
+        _stageSelectPanel.SetActive(false);
+        Stage = false;
     }
 
     private void Update()
