@@ -36,7 +36,8 @@ public class Projectile : PoolableMono
 
     private void Update()
     {
-        if (target == null)
+        if (target == null ||
+            target.gameObject.activeInHierarchy == false)
         {
             Explosion();
             return;

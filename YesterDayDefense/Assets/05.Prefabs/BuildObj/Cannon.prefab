@@ -4967,7 +4967,7 @@ MonoBehaviour:
   animator: {fileID: 2307120002106133629}
   _turretName: Cannon
   _exploveRadius: 0
-  _attackDamage: 8
+  _attackDamage: 30
   shootCoolDown: 1
   lockSpeed: 100
   _attackDist: 10
@@ -10486,7 +10486,7 @@ MonoBehaviour:
   _blockinfo:
     name: Cannon
     health: 100
-    attackDamage: 5
+    attackDamage: 20
     attackDist: 8
   _defaultPrice: 100
   _enhancementValue: 0
@@ -25592,7 +25592,7 @@ MonoBehaviour:
   animator: {fileID: 7252167035051635332}
   _turretName: Cannon
   _exploveRadius: 0
-  _attackDamage: 8
+  _attackDamage: 30
   shootCoolDown: 0.5
   lockSpeed: 100
   _attackDist: 10
@@ -30838,7 +30838,7 @@ MonoBehaviour:
   animator: {fileID: 8079258344652375463}
   _turretName: Cannon
   _exploveRadius: 0
-  _attackDamage: 5
+  _attackDamage: 20
   shootCoolDown: 2
   lockSpeed: 100
   _attackDist: 8
@@ -41223,7 +41223,7 @@ MonoBehaviour:
   animator: {fileID: 8926103198524284397}
   _turretName: Cannon
   _exploveRadius: 0
-  _attackDamage: 5
+  _attackDamage: 25
   shootCoolDown: 1
   lockSpeed: 100
   _attackDist: 8

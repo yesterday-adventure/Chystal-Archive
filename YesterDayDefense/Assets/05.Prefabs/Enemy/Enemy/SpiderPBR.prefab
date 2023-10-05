@@ -714,9 +714,10 @@ MonoBehaviour:
   _attackSound: {fileID: 7179775241263750765}
   _damage: {fileID: 1899340729193291282}
   _dieSound: {fileID: 8135671086679432206}
-  _hp: 10
-  _attack: 10
-  _speed: 1
+  _hp: 15
+  _attack: 20
+  _speed: 2
+  _money: 25
   xIdx: 0
   yIdx: 0
 --- !u!136 &386029255190149951
