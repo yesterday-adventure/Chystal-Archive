@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Transform monsterParentTrm;
     private UIManager _uiManager;
 
-    //나중에 여기다가 몬스터 몇마리 남았는지 필요함
+    public bool isGameClear = false;
 
     private void Awake()
     {
@@ -41,9 +41,6 @@ public class GameManager : MonoBehaviour
             PoolManager.Instance.CreatePool(pool);
         foreach (var pool in _monsterpoolingList)
             PoolManager.Instance.CreatePool(pool,0);
-
-
-
     }
 
     public void PlusMoney(int plus)
@@ -64,5 +61,11 @@ public class GameManager : MonoBehaviour
         {
             monster.GameOver();
         }
+    }
+
+    private void Update()
+    {
+        if (isGameClear)
+            Debug.Log("이얏!클리어!");
     }
 }
