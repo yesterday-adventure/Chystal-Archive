@@ -148,7 +148,89 @@ public class LoadWeight : MonoBehaviour
             } while (yIdx > 0);
         }
 
-        if(isDebug)
+        for (int i = 1; i <= 32; i++)
+        {
+            xIdx = i; // ¿ÞÂÊ ³¡¿¡¼­
+            yIdx = 0;
+            do
+            {
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
+                {
+                    endVal[centerX - xIdx, centerY - yIdx] =
+                        Mathf.Min(endVal[centerX - xIdx + 1, centerY - yIdx],
+                        Mathf.Min(endVal[centerX - xIdx - 1, centerY - yIdx],
+                        Mathf.Min(endVal[centerX - xIdx, centerY - yIdx + 1],
+                        endVal[centerX - xIdx, centerY - yIdx - 1]))) +
+                        weight[centerX - xIdx, centerY - yIdx];
+                }
+                xIdx--;
+                yIdx--;
+            } while (xIdx > 0);
+
+            do
+            {
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
+                {
+                    endVal[centerX - xIdx, centerY - yIdx] =
+                            Mathf.Min(endVal[centerX - xIdx + 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx - 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx, centerY - yIdx + 1],
+                            endVal[centerX - xIdx, centerY - yIdx - 1]))) +
+                            weight[centerX - xIdx, centerY - yIdx];
+                }
+                xIdx--;
+                yIdx++;
+            } while (yIdx < 0);
+
+            do
+            {
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
+                {
+                    endVal[centerX - xIdx, centerY - yIdx] =
+                            Mathf.Min(endVal[centerX - xIdx + 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx - 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx, centerY - yIdx + 1],
+                            endVal[centerX - xIdx, centerY - yIdx - 1]))) +
+                            weight[centerX - xIdx, centerY - yIdx];
+                }
+                xIdx++;
+                yIdx++;
+            } while (xIdx < 0);
+
+            do
+            {
+                if (centerX - xIdx >= 1 && centerX - xIdx <= 31 && centerY - yIdx >= 1 && centerY - yIdx <= 31)
+                {
+                    endVal[centerX - xIdx, centerY - yIdx] =
+                            Mathf.Min(endVal[centerX - xIdx + 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx - 1, centerY - yIdx],
+                            Mathf.Min(endVal[centerX - xIdx, centerY - yIdx + 1],
+                            endVal[centerX - xIdx, centerY - yIdx - 1]))) +
+                            weight[centerX - xIdx, centerY - yIdx];
+                }
+                xIdx++;
+                yIdx--;
+            } while (yIdx > 0);
+
+
+        }
+
+        for (int i = 1; i < 32; i++)
+        {
+            endVal[i, 1] = 500;
+            endVal[i, 2] = 500;
+            endVal[i, 3] = 500;
+            endVal[i, 31] = 500;
+            endVal[i, 30] = 500;
+            endVal[i, 29] = 500;
+            endVal[1, i] = 500;
+            endVal[2, i] = 500;
+            endVal[3, i] = 500;
+            endVal[31, i] = 500;
+            endVal[30, i] = 500;
+            endVal[29, i] = 500;
+        }
+        if (isDebug)
         {
             MapDebug();
         }
@@ -176,7 +258,7 @@ public class LoadWeight : MonoBehaviour
 
     public XY FindNextPos(int x, int y)
     {
-        xy.x = x; 
+        xy.x = x;
         xy.y = y;
 
         int randVal = Random.Range(0, 4);
@@ -186,10 +268,10 @@ public class LoadWeight : MonoBehaviour
         else if (randVal == 1)
             CheckRight(x, y, 0);
         else if (randVal == 2)
-            CheckUp(x, y, 0); 
+            CheckUp(x, y, 0);
         else if (randVal == 3)
             CheckDown(x, y, 0);
-            
+
 
         return xy;
     }
