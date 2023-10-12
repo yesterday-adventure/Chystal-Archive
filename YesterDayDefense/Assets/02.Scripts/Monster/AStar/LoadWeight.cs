@@ -217,17 +217,17 @@ public class LoadWeight : MonoBehaviour
         for (int i = 1; i < 32; i++)
         {
             endVal[i, 1] = 500;
-            endVal[i, 2] = 500;
-            endVal[i, 3] = 500;
+            endVal[i, 2] = 499;
+            endVal[i, 3] = 498;
             endVal[i, 31] = 500;
-            endVal[i, 30] = 500;
-            endVal[i, 29] = 500;
+            endVal[i, 30] = 499;
+            endVal[i, 29] = 498;
             endVal[1, i] = 500;
-            endVal[2, i] = 500;
-            endVal[3, i] = 500;
+            endVal[2, i] = 499;
+            endVal[3, i] = 498;
             endVal[31, i] = 500;
-            endVal[30, i] = 500;
-            endVal[29, i] = 500;
+            endVal[30, i] = 499;
+            endVal[29, i] = 498;
         }
         if (isDebug)
         {
