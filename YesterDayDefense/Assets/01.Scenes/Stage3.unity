@@ -283,32 +283,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveImage: {fileID: 1696837932829014018, guid: 14175552359f8744ea14045d8539fb07, type: 3}
   _waveSlider: {fileID: 1094440560}
-  _maxTimer: 60
+  _maxTimer: 180
   _waveTypes:
   - spawners:
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 0200000003000000
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 01000000
       xidx: 25
       yidx: 25
       spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 0100000001000000
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 01000000
       xidx: 25
       yidx: 5
-      spawnDelay: 2
+      spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 03000000
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 01000000
       xidx: 5
       yidx: 25
-      spawnDelay: 2
+      spawnDelay: 1
     - monsters:
-      - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 02000000
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 01000000
       xidx: 5
       yidx: 5
       spawnDelay: 1
@@ -316,59 +314,86 @@ MonoBehaviour:
     _isStart: 0
   - spawners:
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 0100000002000000
+      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      cnts: 020000000200000002000000
       xidx: 25
       yidx: 25
-      spawnDelay: 2
+      spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 0400000001000000
+      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      cnts: 020000000200000002000000
+      xidx: 5
+      yidx: 25
+      spawnDelay: 1
+    - monsters:
+      - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
+      - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
+      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      cnts: 020000000200000002000000
       xidx: 25
       yidx: 5
       spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 02000000
-      xidx: 5
-      yidx: 25
-      spawnDelay: 2
-    - monsters:
+      - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
       - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
-      cnts: 03000000
+      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
+      cnts: 020000000200000002000000
       xidx: 5
       yidx: 5
       spawnDelay: 1
-    spawnTime: 40
+    spawnTime: 60
     _isStart: 0
   - spawners:
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 0a000000
-      xidx: 2
-      yidx: 28
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 02000000
+      xidx: 25
+      yidx: 25
+      spawnDelay: 2
+    - monsters:
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 03000000
+      xidx: 20
+      yidx: 25
       spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 0a000000
-      xidx: 28
-      yidx: 28
-      spawnDelay: 1
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 02000000
+      xidx: 15
+      yidx: 25
+      spawnDelay: 2
     - monsters:
       - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 0a000000
-      xidx: 28
-      yidx: 2
+      cnts: 05000000
+      xidx: 15
+      yidx: 25
       spawnDelay: 1
     - monsters:
-      - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
-      cnts: 0a000000
-      xidx: 2
-      yidx: 2
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 01000000
+      xidx: 10
+      yidx: 25
       spawnDelay: 1
-    spawnTime: 60
+    - monsters:
+      - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
+      cnts: 06000000
+      xidx: 5
+      yidx: 25
+      spawnDelay: 1
+    spawnTime: 100
+    _isStart: 0
+  - spawners:
+    - monsters:
+      - {fileID: -3597062234417276841, guid: 196cb74b233e488796423925cf1a7d66, type: 3}
+      cnts: 0a000000
+      xidx: 15
+      yidx: 25
+      spawnDelay: 1
+    spawnTime: 180
     _isStart: 0
   _curWaveTime: 0
   isOver: 0
@@ -2923,7 +2948,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999187875}
-  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 25, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3272,7 +3297,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144537105}
-  m_LocalRotation: {x: 0.6339889, y: -0.000000009979813, z: 0.00000000818149, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.000000009979813, z: -0.00000000818149, w: 0.7733422}
   m_LocalPosition: {x: 0, y: 15, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4164,7 +4189,7 @@ MonoBehaviour:
   - {fileID: 8290020038030387467, guid: 433a831b00ce40d38355ed87cd4effd8, type: 3}
   - {fileID: -1826604213466234163, guid: 89dcc4601fd1424bbdb6ccc297185ab5, type: 3}
   - {fileID: -7744650017089084600, guid: 4a7d79c32a2d4de88831b8812bc8bc4e, type: 3}
-  <Money>k__BackingField: 1500
+  <Money>k__BackingField: 1000
   <TurretCount>k__BackingField: 0
   monsterParentTrm: {fileID: 1265351403}
   isGameClear: 0
