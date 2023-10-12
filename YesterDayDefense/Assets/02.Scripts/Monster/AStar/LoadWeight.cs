@@ -257,6 +257,8 @@ public class LoadWeight : MonoBehaviour
 
     public XY FindNextPos(int x, int y)
     {
+        x = Mathf.Clamp(x, 4, 29);
+        y = Mathf.Clamp(y, 4, 29);
         xy.x = x;
         xy.y = y;
 
