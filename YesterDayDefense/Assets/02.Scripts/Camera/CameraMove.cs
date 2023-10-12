@@ -21,14 +21,7 @@ public class CameraMove : MonoBehaviour
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
         tempVal = wheelInput * scrollSpeed + _cmvcam.m_Lens.FieldOfView;
-        if (wheelInput > 0)
-        {
-            _cmvcam.m_Lens.FieldOfView = Mathf.Max(tempVal,60);
-        }
-        else if (wheelInput < 0)
-        {
-            _cmvcam.m_Lens.FieldOfView = Mathf.Min(tempVal,80);
-        }
+        _cmvcam.m_Lens.FieldOfView = Mathf.Clamp(tempVal, 60, 100);
     }
 
     private void LateUpdate()
