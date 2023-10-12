@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Transform _gameUIPanel;
+    [SerializeField]
+    private GameObject _clearPanel;
+    [SerializeField]
+    private GameObject _gameOverPanel;
 
     [SerializeField]
     private List<PoolableMono> _poolingList = new List<PoolableMono>();
@@ -74,11 +78,14 @@ public class GameManager : MonoBehaviour
         {
             monster.GameOver();
         }
+
+        _gameOverPanel.SetActive(true);
     }
 
     private void Update()
     {
-        if (isGameClear)
-            Debug.Log("ÀÌ¾æ!Å¬¸®¾î!");
+        if (isGameClear && _clearPanel.activeSelf == false)
+            _clearPanel.SetActive(true);
+
     }
 }
