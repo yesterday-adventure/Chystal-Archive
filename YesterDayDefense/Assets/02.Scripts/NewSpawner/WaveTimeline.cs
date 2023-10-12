@@ -61,8 +61,7 @@ public class WaveTimeline : MonoBehaviour
         _curWaveTime += Time.deltaTime;
         _waveSlider.value = _curWaveTime / _maxTimer;
 
-        if(_curWaveTime > _maxTimer)
-            isOver = true;
+        
     }
 
     private void FixedUpdate()
@@ -88,6 +87,7 @@ public class WaveTimeline : MonoBehaviour
     IEnumerator StartWave(Spawner spawner)
     {
         WaitForSeconds wfs = new WaitForSeconds(spawner.spawnDelay);
+        Transform spawnParent = GameManager.Instance.monsterParentTrm;
         for (int i = 0; i < spawner.monsters.Length; i++)
         {
             for(int j = 0; j < spawner.cnts[i]; j++)
@@ -95,10 +95,14 @@ public class WaveTimeline : MonoBehaviour
                 Monster mob = PoolManager.Instance.Pop(spawner.monsters[i].name) as Monster;
                 mob.xIdx = spawner.xidx;
                 mob.yIdx = spawner.yidx;
+                mob.transform.SetParent(spawnParent);
                 mob.Reset();
 
             }
             yield return wfs;
         }
+
+        if (_curWaveTime > _maxTimer)
+            isOver = true;
     }
 }

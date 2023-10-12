@@ -11,7 +11,7 @@ public class Crystal : BuildAbleMono
         UIManager.Instance.HPUI.TweenHPAnim((float)_currentHealth / _maxHealth);
         if (_currentHealth <= 0)
         {
-            
+            GameManager.Instance.GameOver();
             MonsterManager.Instance.GameOver();
         }
     }
